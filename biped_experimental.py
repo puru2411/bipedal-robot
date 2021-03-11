@@ -241,20 +241,17 @@ def rightLegStarting(t, xi, yi):
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def leftLegStopping(t, xi, yi):
+def leftLegStopping(t, xi, yi):  ##########################3
 	# xi, yi = 0, 0
-	t1 = 5*t0/10
-	t2 = t0-t1
-	if(t < t1):
-		x2 = xi + 3*(x0/4)*((t)**2)/((t1)**2) - 2*(x0/4)*((t)**3)/((t1)**3)
-		y2 = (yi - l0/2) - (temp)*np.sqrt(abs(1-((x2-(xi + x0/4))/(x0/4))**2))
-	elif(t < t2):
-		x2 = xi + x0/4
-		y2 = yi-l0/2-temp
-	else:
-		x2 = xi + x0/4
-		y2 = (yi-l0/2-temp) + 3*(temp)*((t-t2)**2)/((t0-t2)**2) - 2*(temp)*((t-t2)**3)/((t0-t2)**3)
 
+	if(t < t0/4):
+		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
+	elif(t < 3*t0/4):
+		x2 = xi + x0/8
+	else:
+		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
+	
+	y2 = (yi - l0/2) - (temp)*np.sqrt(abs(1-((x2-(xi + x0/8))/(x0/8))**2))
 	z2 = z0
 
 
@@ -267,12 +264,11 @@ def leftLegStopping(t, xi, yi):
 	y1 = yi - l0/2
 	z1 = 0
 
-	t3 = 3*t0/10
-	t4 = t0-t3
-	if(t < t3):
+
+	if(t < t0/4):
 		x4 = xi-x0/4 
-	elif(t < t4):
-		x4 = xi-x0/4 + 3*(x0/2)*((t-t3)**2)/((t0-2*t3)**2) - 2*(x0/2)*((t-t3)**3)/((t0-2*t3)**3)
+	elif(t < 3*t0/4):
+		x4 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
 	else:
 		x4 = xi + x0/4
 	y4 = yi+l0/2
@@ -281,19 +277,17 @@ def leftLegStopping(t, xi, yi):
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def rightLegStopping(t, xi, yi):
+def rightLegStopping(t, xi, yi):   ##########################
 	# xi, yi = 0, 0
-	t1 = 5*t0/10
-	t2 = t0-t1
-	if(t < t1):
-		x2 = xi + 3*(x0/4)*((t)**2)/((t1)**2) - 2*(x0/4)*((t)**3)/((t1)**3)
-		y2 = (yi-l0/2) + (temp)*np.sqrt(abs(1-((x2-(xi+x0/4))/(x0/4))**2))
-	elif(t < t2):
-		x2 = xi + x0/4
-		y2 = yi-l0/2+temp
+
+	if(t < t0/4):
+		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
+	elif(t < 3*t0/4):
+		x2 = xi + x0/8
 	else:
-		x2 = xi + x0/4
-		y2 = ((yi-l0/2+temp) + 3*(-temp)*((t-t2)**2)/((t0-t2)**2) - 2*(-temp)*((t-t2)**3)/((t0-t2)**3))
+		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
+	
+	y2 = (yi-l0/2) + (temp)*np.sqrt(abs(1-((x2-(xi+x0/8))/(x0/8))**2))
 	z2 = z0
 
 
@@ -306,12 +300,11 @@ def rightLegStopping(t, xi, yi):
 	y4 = yi+l0/2 
 	z4 = 0
 
-	t3 = 3*t0/10
-	t4 = t0-t3
-	if(t < t3):
+
+	if(t < t0/4):
 		x1 = xi-x0/4 
-	elif(t < t4):
-		x1 = xi-x0/4 + 3*(x0/2)*((t-t3)**2)/((t0-2*t3)**2) - 2*(x0/2)*((t-t3)**3)/((t0-2*t3)**3)
+	elif(t < 3*t0/4):
+		x1 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
 	else:
 		x1 = xi + x0/4
 	y1 = yi - l0/2
