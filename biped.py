@@ -109,6 +109,57 @@ def sitting(t):
 
 temp = 0.6*l0
 
+
+def standing(t):    #################
+	xi, yi = 0, 0
+
+	x2 = xi
+	y2 = yi-l0/2
+	#z2 = (l1+l2+l3) + 3*(z0 - (l1+l2+l3))*((t)**2)/((t0/4)**2) - 2*(z0 - (l1+l2+l3))*((t)**3)/((t0/4)**3)
+	z2 = z0 - 3*(z0 - (l1+l2+l3))*((t)**2)/((t0/4)**2) + 2*(z0 - (l1+l2+l3))*((t)**3)/((t0/4)**3)
+	
+
+	x3 = x2
+	y3 = y2+l0
+	z3 = z2
+
+	x1 = x2
+	y1 = y2
+	z1 = 0
+
+	x4 = x2
+	y4 = y2+l0
+	z4 = 0
+
+	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4] 
+
+
+def standing_at_height(t,h):    ######################
+	xi, yi = 0, 0
+
+	x2 = xi
+	y2 = yi-l0/2
+	z2 = z0 - 3*(z0 - h)*((t)**2)/((t0/4)**2) + 2*(z0 - h)*((t)**3)/((t0/4)**3)
+	
+
+	x3 = x2
+	y3 = y2+l0
+	z3 = z2
+
+	x1 = x2
+	y1 = y2
+	z1 = 0
+
+	x4 = x2
+	y4 = y2+l0
+	z4 = 0
+
+	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
+
+temp = 0.6*l0
+
+
+
 def leftLegStarting(t, xi, yi):
 	# xi, yi = 0, 0
 	t1 = 4*t0/10
@@ -145,6 +196,47 @@ def leftLegStarting(t, xi, yi):
 		x4 = xi + x0/2
 	y4 = yi+l0/2
 	z4 = (.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/4))**2))
+
+
+	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
+
+
+def rightLegStarting(t, xi, yi):  ##########################
+	# xi, yi = 0, 0
+	t1 = 4*t0/10
+	t2 = t0-t1
+	if(t < t1):
+		x2 = xi
+		y2 = ((yi-l0/2) + 3*(temp)*((t)**2)/((t1)**2) - 2*(temp)*((t)**3)/((t1)**3))
+	elif(t < t2):
+		x2 = xi
+		y2 = (yi-l0/2 + temp) 
+	else:
+		x2 = xi + 3*(x0/4)*((t-t2)**2)/((t0-t2)**2) - 2*(x0/4)*((t-t2)**3)/((t0-t2)**3)
+		y2 = ((yi - l0/2) + (temp)*np.sqrt(abs(1-((x2-xi)/(x0/4))**2))) 
+	z2 = z0
+
+
+	x3 = x2
+	y3 = y2+l0
+	z3 = z2
+
+
+	x4 = xi
+	y4 = yi + l0/2 
+	z4 = 0
+
+
+	t3 = 3*t0/10
+	t4 = t0-t3
+	if(t < t3):
+		x1 = xi
+	elif(t < t4):
+		x1 = xi + 3*(x0/2)*((t-t3)**2)/((t0-2*t3)**2) - 2*(x0/2)*((t-t3)**3)/((t0-2*t3)**3)
+	else:
+		x1 = xi + x0/2
+	y1 = yi-l0/2 
+	z1 = (.015)*np.sqrt(abs(1-((x1-(xi + x0/4))/(x0/4))**2))
 
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
@@ -223,6 +315,79 @@ def leftLegWalking(t, xi, yi):
 	z4 = (0.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
+
+
+def leftLegStopping(t, xi, yi):  ##########################3
+	# xi, yi = 0, 0
+
+	if(t < t0/4):
+		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
+	elif(t < 3*t0/4):
+		x2 = xi + x0/8
+	else:
+		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
+	
+	y2 = (yi - l0/2) - (temp)*np.sqrt(abs(1-((x2-(xi + x0/8))/(x0/8))**2))
+	z2 = z0
+
+
+	x3 = x2
+	y3 = y2+l0
+	z3 = z2
+
+
+	x1 = xi + x0/4
+	y1 = yi - l0/2
+	z1 = 0
+
+
+	if(t < t0/4):
+		x4 = xi-x0/4 
+	elif(t < 3*t0/4):
+		x4 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
+	else:
+		x4 = xi + x0/4
+	y4 = yi+l0/2
+	z4 = (0.015)*np.sqrt(abs(1-((x4-xi)/(x0/4))**2))
+
+	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
+
+
+def rightLegStopping(t, xi, yi):   ##########################
+	# xi, yi = 0, 0
+
+	if(t < t0/4):
+		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
+	elif(t < 3*t0/4):
+		x2 = xi + x0/8
+	else:
+		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
+	
+	y2 = (yi-l0/2) + (temp)*np.sqrt(abs(1-((x2-(xi+x0/8))/(x0/8))**2))
+	z2 = z0
+
+
+	x3 = x2
+	y3 = y2+l0
+	z3 = z2
+
+
+	x4 = xi + x0/4
+	y4 = yi+l0/2 
+	z4 = 0
+
+
+	if(t < t0/4):
+		x1 = xi-x0/4 
+	elif(t < 3*t0/4):
+		x1 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
+	else:
+		x1 = xi + x0/4
+	y1 = yi - l0/2
+	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi))/(x0/4))**2))
+
+	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
+
 
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
@@ -472,10 +637,66 @@ def sit_at_height():
 		time.sleep(.001)
 
 
+def stand_at_height(h):  #####################
+	t =0
+	while t<=t0/4:
+		p1 , p2, p3, p4 = standing(t,h)
+
+		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
+		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		# print("p2, p1 : ", p2, p1)
+		# print("rightLegMotorPosition : ", rightLegMotorPosition)
+		# print("p3, p4 : ", p3, p4)
+		# print("leftLegMotorPosition : ", leftLegMotorPosition)
+		for i in range(len(rightLegMotor)):
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
+
+		t+=.001
+		time.sleep(.001)
+		
+def stand_upright():  ###########################
+	t =0
+	while t<=t0/4:
+		p1 , p2, p3, p4 = standing(t)
+
+		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
+		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		# print("p2, p1 : ", p2, p1)
+		# print("rightLegMotorPosition : ", rightLegMotorPosition)
+		# print("p3, p4 : ", p3, p4)
+		# print("leftLegMotorPosition : ", leftLegMotorPosition)
+		for i in range(len(rightLegMotor)):
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
+
+		t+=.001
+		time.sleep(.001)
+
+
 def start_by_leftLeg():
 	t =0
 	while t<=t0:
 		p1 , p2, p3, p4 = leftLegStarting(t, 0, 0)
+
+		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
+		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		# print("p2, p1 : ", p2, p1)
+		# print("rightLegMotorPosition : ", rightLegMotorPosition)
+		# print("p3, p4 : ", p3, p4)
+		# print("leftLegMotorPosition : ", leftLegMotorPosition)
+		for i in range(len(rightLegMotor)):
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
+
+		t+=.0001
+		# time.sleep(.0001)
+
+
+def start_by_rightLeg(): #######################3
+	t =0
+	while t<=t0:
+		p1 , p2, p3, p4 = rightLegStarting(t, 0, 0)
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
@@ -528,6 +749,45 @@ def walk_by_rightLeg():
 		t+=.0001
 		# time.sleep(.0001)
 
+
+def stop_by_leftLeg(): ###################
+	t =0
+	while t<=t0:
+		p1 , p2, p3, p4 = leftLegStopping(t, 0, 0)
+
+		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
+		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		# print("p2, p1 : ", p2, p1)
+		# print("rightLegMotorPosition : ", rightLegMotorPosition)
+		# print("p3, p4 : ", p3, p4)
+		# print("leftLegMotorPosition : ", leftLegMotorPosition)
+		for i in range(len(rightLegMotor)):
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
+
+		t+=.003
+		time.sleep(.02)
+
+
+def stop_by_rightLeg():  ################
+	t =0
+	while t<=t0:
+		p1 , p2, p3, p4 = rightLegStopping(t, 0, 0)
+
+		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
+		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		# print("p2, p1 : ", p2, p1)
+		# print("rightLegMotorPosition : ", rightLegMotorPosition)
+		# print("p3, p4 : ", p3, p4)
+		# print("leftLegMotorPosition : ", leftLegMotorPosition)
+		for i in range(len(rightLegMotor)):
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
+
+		t+=.0003
+		time.sleep(.02)
+
+
 ################################################^^^^^^^^^^^^^^^^^^^################################################
 
 
@@ -537,18 +797,38 @@ def walk_by_rightLeg():
 
 
 time.sleep(1.5)
+# starting by left leg
+# sit_at_height()
 
+# time.sleep(1.5)
+
+# start_by_leftLeg()
+
+# for _ in range(1):
+
+# 	walk_by_rightLeg()
+# 	walk_by_leftLeg()
+
+# stop_by_rightLeg()
+
+
+# starting by right leg
 sit_at_height()
 
 time.sleep(1.5)
 
-start_by_leftLeg()
+start_by_rightLeg()
 
-for _ in range(10):
+for _ in range(1):
 
-	walk_by_rightLeg()
 	walk_by_leftLeg()
+	walk_by_rightLeg()
+	
 
+stop_by_leftLeg()
+
+
+stand_upright()
 
 
 time.sleep(10)
