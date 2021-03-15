@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <robot name="stairs">
 
-<material name="silver">
-  <color rgba="0.700 0.700 0.700 1.000"/>
+<material name="red">
+  <color rgba="1.000 0.000 0.000 1.000"/>
 </material>
 
 <link name="base_link">
@@ -16,7 +16,7 @@
     <geometry>
       <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="red"/>
     <material/>
   </visual>
   <collision>

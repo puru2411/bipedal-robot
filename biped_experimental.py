@@ -59,6 +59,13 @@ planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURD
 robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.304],
                    p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
 
+#stairs
+stairsStartPos = [1,-0.08,0]
+stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
+robotId = p.loadURDF("stairs.urdf",stairsStartPos, stairsStartOrientation, useFixedBase = 1, 
+                   # useMaximalCoordinates=1, ## New feature in Pybullet
+                   flags=p.URDF_USE_INERTIA_FROM_FILE)
+
 rightLegMotor = [1, 2, 3, 4, 5, 6]
 leftLegMotor = [17, 18, 19, 20 ,21, 22]
 
@@ -241,17 +248,20 @@ def rightLegStarting(t, xi, yi):
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def leftLegStopping(t, xi, yi):  ##########################3
+def leftLegStopping(t, xi, yi):
 	# xi, yi = 0, 0
-
-	if(t < t0/4):
-		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
-	#elif(t < 3*t0/4):
-	#	x2 = xi + x0/8
+	t1 = 5*t0/10
+	t2 = t0-t1
+	if(t < t1):
+		x2 = xi + 3*(x0/4)*((t)**2)/((t1)**2) - 2*(x0/4)*((t)**3)/((t1)**3)
+		y2 = (yi - l0/2) - (temp)*np.sqrt(abs(1-((x2-(xi + x0/4))/(x0/4))**2))
+	elif(t < t2):
+		x2 = xi + x0/4
+		y2 = yi-l0/2-temp
 	else:
-		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
-	
-	y2 = (yi - l0/2) - (temp)*np.sqrt(abs(1-((x2-(xi + x0/8))/(x0/8))**2))
+		x2 = xi + x0/4
+		y2 = (yi-l0/2-temp) + 3*(temp)*((t-t2)**2)/((t0-t2)**2) - 2*(temp)*((t-t2)**3)/((t0-t2)**3)
+
 	z2 = z0
 
 
@@ -264,11 +274,12 @@ def leftLegStopping(t, xi, yi):  ##########################3
 	y1 = yi - l0/2
 	z1 = 0
 
-
-	if(t < t0/4):
+	t3 = 3*t0/10
+	t4 = t0-t3
+	if(t < t3):
 		x4 = xi-x0/4 
-	elif(t < 3*t0/4):
-		x4 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
+	elif(t < t4):
+		x4 = xi-x0/4 + 3*(x0/2)*((t-t3)**2)/((t0-2*t3)**2) - 2*(x0/2)*((t-t3)**3)/((t0-2*t3)**3)
 	else:
 		x4 = xi + x0/4
 	y4 = yi+l0/2
@@ -277,17 +288,19 @@ def leftLegStopping(t, xi, yi):  ##########################3
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def rightLegStopping(t, xi, yi):   ##########################
+def rightLegStopping(t, xi, yi):
 	# xi, yi = 0, 0
-
-	if(t < t0/4):
-		x2 = xi + 3*(x0/8)*((t)**2)/((t0/4)**2) - 2*(x0/8)*((t)**3)/((t0/4)**3)
-	elif(t < 3*t0/4):
-		x2 = xi + x0/8
+	t1 = 5*t0/10
+	t2 = t0-t1
+	if(t < t1):
+		x2 = xi + 3*(x0/4)*((t)**2)/((t1)**2) - 2*(x0/4)*((t)**3)/((t1)**3)
+		y2 = (yi-l0/2) + (temp)*np.sqrt(abs(1-((x2-(xi+x0/4))/(x0/4))**2))
+	elif(t < t2):
+		x2 = xi + x0/4
+		y2 = yi-l0/2+temp
 	else:
-		x2 = (xi + x0/8) + 3*(x0/8)*((t-3*t0/4)**2)/((t0/4)**2) - 2*(x0/8)*((t-3*t0/4)**3)/((t0/4)**3)
-	
-	y2 = (yi-l0/2) + (temp)*np.sqrt(abs(1-((x2-(xi+x0/8))/(x0/8))**2))
+		x2 = xi + x0/4
+		y2 = ((yi-l0/2+temp) + 3*(-temp)*((t-t2)**2)/((t0-t2)**2) - 2*(-temp)*((t-t2)**3)/((t0-t2)**3))
 	z2 = z0
 
 
@@ -300,11 +313,12 @@ def rightLegStopping(t, xi, yi):   ##########################
 	y4 = yi+l0/2 
 	z4 = 0
 
-
-	if(t < t0/4):
+	t3 = 3*t0/10
+	t4 = t0-t3
+	if(t < t3):
 		x1 = xi-x0/4 
-	elif(t < 3*t0/4):
-		x1 = xi-x0/4 + 3*(x0/2)*((t-t0/4)**2)/((t0/2)**2) - 2*(x0/2)*((t-t0/4)**3)/((t0/2)**3)
+	elif(t < t4):
+		x1 = xi-x0/4 + 3*(x0/2)*((t-t3)**2)/((t0-2*t3)**2) - 2*(x0/2)*((t-t3)**3)/((t0-2*t3)**3)
 	else:
 		x1 = xi + x0/4
 	y1 = yi - l0/2
@@ -802,19 +816,19 @@ time.sleep(1.5)
 
 
 # starting by left leg
-start_by_leftLeg()
+#start_by_leftLeg()
 
-for _ in range(1):
-	walk_by_rightLeg()
-	walk_by_leftLeg()
+#for _ in range(2):
+	#walk_by_rightLeg()
+	#walk_by_leftLeg()
 
-stop_by_rightLeg()
+#stop_by_rightLeg()
 
 
 # starting by right leg
 start_by_rightLeg()
 
-for _ in range(1):
+for _ in range(4):
 
 	walk_by_leftLeg()
 	walk_by_rightLeg()
