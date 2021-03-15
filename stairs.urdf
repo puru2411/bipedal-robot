@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<robot name="stairs">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.085 -0.51 0.105"/>
+    <mass value="367.96874999999994"/>
+    <inertia ixx="23.157500000000013" ixy="0.0" ixz="-4.440892098500626e-16" iyy="3.6858203125000006" iyz="0.0" izz="23.304687500000014"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+</robot>
