@@ -1,6 +1,6 @@
 # code by 
 # purushotam kumar agrawal { git ---> PURU2411 }
-# Vibhanshu Vaibhav
+# Vibhanshu Vaibhav { git ---> VibhanshuV }
 
 import pybullet as p
 import time
@@ -45,7 +45,7 @@ useRealTimeSimulation = 1
 p.setRealTimeSimulation(useRealTimeSimulation)
 
 p.setGravity(0, 0, -9.8)
-p.resetDebugVisualizerCamera(cameraDistance=1, cameraYaw=10, cameraPitch=-5, cameraTargetPosition=[0, 0, 0.1], physicsClientId=physicsClient)
+# p.resetDebugVisualizerCamera(cameraDistance=1, cameraYaw=10, cameraPitch=-5, cameraTargetPosition=[0, 0, 0.1], physicsClientId=physicsClient)
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
 
@@ -161,9 +161,6 @@ def standing_at_height(t,h):
 	z4 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
-
-temp = 0.6*l0
-
 
 
 def leftLegStarting(t, xi, yi):
@@ -327,8 +324,12 @@ def rightLegStopping(t, xi, yi):
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def rightLegWalking(t, xi, yi):
+def rightLegWalking(turn, t, xi, yi):
 	# xi, yi = x0/2, 0
+	temp = 0.6*l0
+	if(turn == "R"):
+		temp = 0.3*l0
+
 	t1 = 5*t0/10
 	t2 = t0-t1
 	if(t < t1):
@@ -360,12 +361,18 @@ def rightLegWalking(t, xi, yi):
 		x1 = xi + 3*x0/4
 	y1 = yi - l0/2
 	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
+	if(turn == "R"):
+		z1 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def leftLegWalking(t, xi, yi):
+def leftLegWalking(turn, t, xi, yi):
 	# xi, yi = 0, 0
+	temp = 0.6*l0
+	if(turn == "L"):
+		temp = 0.3*l0
+
 	t1 = 5*t0/10
 	t2 = t0-t1
 	if(t < t1):
@@ -398,6 +405,8 @@ def leftLegWalking(t, xi, yi):
 		x4 = xi + 3*x0/4
 	y4 = yi+l0/2
 	z4 = (0.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
+	if(turn == "L"):
+		z4 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -726,10 +735,10 @@ def start_by_rightLeg():
 		# time.sleep(.0001)
 
 
-def walk_by_leftLeg():
+def walk_by_leftLeg(turn):
 	t =0
 	while t<=t0:
-		p1 , p2, p3, p4 = leftLegWalking(t, 0, 0)
+		p1 , p2, p3, p4 = leftLegWalking(turn, t, 0, 0)
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
@@ -745,10 +754,10 @@ def walk_by_leftLeg():
 		# time.sleep(.0001)
 
 
-def walk_by_rightLeg():
+def walk_by_rightLeg(turn):
 	t =0
 	while t<=t0:
-		p1 , p2, p3, p4 = rightLegWalking(t, 0, 0)
+		p1 , p2, p3, p4 = rightLegWalking(turn, t, 0, 0)
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
@@ -819,8 +828,8 @@ time.sleep(1.5)
 #start_by_leftLeg()
 
 #for _ in range(2):
-	#walk_by_rightLeg()
-	#walk_by_leftLeg()
+	#walk_by_rightLeg(turn = "S")
+	#walk_by_leftLeg(turn = "S")
 
 #stop_by_rightLeg()
 
@@ -830,8 +839,8 @@ start_by_rightLeg()
 
 for _ in range(4):
 
-	walk_by_leftLeg()
-	walk_by_rightLeg()
+	walk_by_leftLeg(turn = "S")  # "L" --> left, "R" --> rigth, "S" --> stright
+	walk_by_rightLeg(turn = "S")
 	
 stop_by_leftLeg()
 

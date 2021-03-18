@@ -1,6 +1,6 @@
 # code by 
 # purushotam kumar agrawal { git ---> PURU2411 }
-# Vibhanshu Vaibhav
+# Vibhanshu Vaibhav { git ---> VibhanshuV }
 
 import pybullet as p
 import time
