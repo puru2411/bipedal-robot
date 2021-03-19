@@ -837,10 +837,10 @@ time.sleep(1.5)
 # starting by right leg
 start_by_rightLeg()
 
-for _ in range(4):
+for _ in range(2):
 
-	walk_by_leftLeg(turn = "S")  # "L" --> left, "R" --> rigth, "S" --> stright
-	walk_by_rightLeg(turn = "S")
+	walk_by_leftLeg(turn = "L")  # "L" --> left, "R" --> rigth, "S" --> stright
+	walk_by_rightLeg(turn = "L")
 	
 stop_by_leftLeg()
 

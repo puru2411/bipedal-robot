@@ -45,7 +45,7 @@ useRealTimeSimulation = 1
 p.setRealTimeSimulation(useRealTimeSimulation)
 
 p.setGravity(0, 0, -9.8)
-p.resetDebugVisualizerCamera(cameraDistance=1, cameraYaw=10, cameraPitch=-5, cameraTargetPosition=[0, 0, 0.1], physicsClientId=physicsClient)
+# p.resetDebugVisualizerCamera(cameraDistance=1, cameraYaw=10, cameraPitch=-5, cameraTargetPosition=[0, 0, 0.1], physicsClientId=physicsClient)
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
 
@@ -58,6 +58,13 @@ planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURD
 
 robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.304],
                    p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
+
+#stairs
+stairsStartPos = [1,-0.08,0]
+stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
+robotId = p.loadURDF("stairs.urdf",stairsStartPos, stairsStartOrientation, useFixedBase = 1, 
+                   # useMaximalCoordinates=1, ## New feature in Pybullet
+                   flags=p.URDF_USE_INERTIA_FROM_FILE)
 
 rightLegMotor = [1, 2, 3, 4, 5, 6]
 leftLegMotor = [17, 18, 19, 20 ,21, 22]
@@ -154,9 +161,6 @@ def standing_at_height(t,h):
 	z4 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
-
-temp = 0.6*l0
-
 
 
 def leftLegStarting(t, xi, yi):
@@ -320,8 +324,12 @@ def rightLegStopping(t, xi, yi):
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def rightLegWalking(t, xi, yi):
+def rightLegWalking(turn, t, xi, yi):
 	# xi, yi = x0/2, 0
+	temp = 0.6*l0
+	if(turn == "R"):
+		temp = 0.3*l0
+
 	t1 = 5*t0/10
 	t2 = t0-t1
 	if(t < t1):
@@ -353,12 +361,18 @@ def rightLegWalking(t, xi, yi):
 		x1 = xi + 3*x0/4
 	y1 = yi - l0/2
 	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
+	if(turn == "R"):
+		z1 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
 
-def leftLegWalking(t, xi, yi):
+def leftLegWalking(turn, t, xi, yi):
 	# xi, yi = 0, 0
+	temp = 0.6*l0
+	if(turn == "L"):
+		temp = 0.3*l0
+
 	t1 = 5*t0/10
 	t2 = t0-t1
 	if(t < t1):
@@ -391,6 +405,8 @@ def leftLegWalking(t, xi, yi):
 		x4 = xi + 3*x0/4
 	y4 = yi+l0/2
 	z4 = (0.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
+	if(turn == "L"):
+		z4 = 0
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -719,10 +735,10 @@ def start_by_rightLeg():
 		# time.sleep(.0001)
 
 
-def walk_by_leftLeg():
+def walk_by_leftLeg(turn):
 	t =0
 	while t<=t0:
-		p1 , p2, p3, p4 = leftLegWalking(t, 0, 0)
+		p1 , p2, p3, p4 = leftLegWalking(turn, t, 0, 0)
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
@@ -738,10 +754,10 @@ def walk_by_leftLeg():
 		# time.sleep(.0001)
 
 
-def walk_by_rightLeg():
+def walk_by_rightLeg(turn):
 	t =0
 	while t<=t0:
-		p1 , p2, p3, p4 = rightLegWalking(t, 0, 0)
+		p1 , p2, p3, p4 = rightLegWalking(turn, t, 0, 0)
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
@@ -809,22 +825,22 @@ time.sleep(1.5)
 
 
 # starting by left leg
-start_by_leftLeg()
+#start_by_leftLeg()
 
-for _ in range(1):
-	walk_by_rightLeg()
-	walk_by_leftLeg()
+#for _ in range(2):
+	#walk_by_rightLeg(turn = "S")
+	#walk_by_leftLeg(turn = "S")
 
-stop_by_rightLeg()
+#stop_by_rightLeg()
 
 
 # starting by right leg
 start_by_rightLeg()
 
-for _ in range(1):
+for _ in range(2):
 
-	walk_by_leftLeg()
-	walk_by_rightLeg()
+	walk_by_leftLeg(turn = "L")  # "L" --> left, "R" --> rigth, "S" --> stright
+	walk_by_rightLeg(turn = "L")
 	
 stop_by_leftLeg()
 
