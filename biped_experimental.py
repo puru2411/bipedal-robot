@@ -1,4 +1,4 @@
-# code by 
+# code by:-
 # purushotam kumar agrawal { git ---> PURU2411 }
 # Vibhanshu Vaibhav { git ---> VibhanshuV }
 
@@ -62,7 +62,7 @@ p.setGravity(0, 0, -9.8)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())  # to load ground
 planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURDF('plane.urdf')
 
-robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.304],
+robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.300],
                    p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
 
 #stairs
@@ -661,8 +661,8 @@ def sit_at_height():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.001
-		time.sleep(.001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def stand_at_height(h):
@@ -680,8 +680,8 @@ def stand_at_height(h):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.001
-		time.sleep(.001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def stand_upright():
@@ -699,8 +699,8 @@ def stand_upright():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.001
-		time.sleep(.001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def start_by_leftLeg():
@@ -718,8 +718,8 @@ def start_by_leftLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.0001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def start_by_rightLeg():
@@ -737,8 +737,8 @@ def start_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.0001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def walk_by_leftLeg(turn):
@@ -763,8 +763,8 @@ def walk_by_leftLeg(turn):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.0001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def walk_by_rightLeg(turn):
@@ -789,8 +789,8 @@ def walk_by_rightLeg(turn):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.0001)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def stop_by_leftLeg():
@@ -808,8 +808,8 @@ def stop_by_leftLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.02)
+		t+=.0002
+		time.sleep(.0001)
 
 
 def stop_by_rightLeg():
@@ -827,8 +827,8 @@ def stop_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0001
-		# time.sleep(.02)
+		t+=.0002
+		time.sleep(.0001)
 
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
@@ -844,7 +844,19 @@ sit_at_height()
 time.sleep(1.5)
 
 
-# starting by left leg
+# forward motion
+x0 = 0.2
+# going stright
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "s")
+	walk_by_leftLeg(turn = "s")
+
+stop_by_rightLeg()
+
+
+# turning right
 start_by_leftLeg()
 
 for _ in range(2):
@@ -854,7 +866,40 @@ for _ in range(2):
 stop_by_rightLeg()
 
 
-# starting by right leg
+# turning left
+start_by_rightLeg()
+
+for _ in range(2):
+
+	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+stop_by_leftLeg()
+
+
+# backward motion
+x0 = -0.2
+# going stright
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "s")
+	walk_by_leftLeg(turn = "s")
+
+stop_by_rightLeg()
+
+
+# turning right
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "r")
+	walk_by_leftLeg(turn = "r")
+
+stop_by_rightLeg()
+
+
+# turning left
 start_by_rightLeg()
 
 for _ in range(2):
@@ -866,7 +911,6 @@ stop_by_leftLeg()
 
 
 stand_upright()
-
 
 time.sleep(10)
 p.disconnect()
