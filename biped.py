@@ -741,7 +741,7 @@ def start_by_rightLeg():
 		time.sleep(.0001)
 
 
-def walk_by_leftLeg(turn):
+def walk_by_leftLeg(turn, angle):
 	t =0
 	while t<=t0:
 		p1 , p2, p3, p4 = leftLegWalking(turn, t, 0, 0)
@@ -749,11 +749,11 @@ def walk_by_leftLeg(turn):
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
 		if(turn == "l"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -767,7 +767,7 @@ def walk_by_leftLeg(turn):
 		time.sleep(.0001)
 
 
-def walk_by_rightLeg(turn):
+def walk_by_rightLeg(turn, angle):
 	t =0
 	while t<=t0:
 		p1 , p2, p3, p4 = rightLegWalking(turn, t, 0, 0)
@@ -775,11 +775,11 @@ def walk_by_rightLeg(turn):
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
 		if(turn == "l"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -850,8 +850,8 @@ x0 = 0.2
 start_by_leftLeg()
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "s")
-	walk_by_leftLeg(turn = "s")
+	walk_by_rightLeg(turn = "s", angle = 0)
+	walk_by_leftLeg(turn = "s", angle = 0)
 
 stop_by_rightLeg()
 
@@ -860,8 +860,8 @@ stop_by_rightLeg()
 start_by_leftLeg()
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "r")
-	walk_by_leftLeg(turn = "r")
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
 stop_by_rightLeg()
 
@@ -871,8 +871,8 @@ start_by_rightLeg()
 
 for _ in range(2):
 
-	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 stop_by_leftLeg()
 
@@ -883,8 +883,8 @@ x0 = -0.2
 start_by_leftLeg()
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "s")
-	walk_by_leftLeg(turn = "s")
+	walk_by_rightLeg(turn = "s", angle = 0)
+	walk_by_leftLeg(turn = "s", angle = 0)
 
 stop_by_rightLeg()
 
@@ -893,8 +893,8 @@ stop_by_rightLeg()
 start_by_leftLeg()
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "r")
-	walk_by_leftLeg(turn = "r")
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
 stop_by_rightLeg()
 
@@ -904,8 +904,8 @@ start_by_rightLeg()
 
 for _ in range(2):
 
-	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 stop_by_leftLeg()
 
