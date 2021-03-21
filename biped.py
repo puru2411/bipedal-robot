@@ -1,3 +1,4 @@
+# x0 = (0, 0.2] for forward 
 # code by 
 # purushotam kumar agrawal { git ---> PURU2411 }
 # Vibhanshu Vaibhav { git ---> VibhanshuV }
@@ -742,6 +743,13 @@ def walk_by_leftLeg(turn):
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		if(turn == "l"):
+			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
+		elif(turn == "r"):
+			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -761,6 +769,13 @@ def walk_by_rightLeg(turn):
 
 		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
 		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		if(turn == "l"):
+			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+		elif(turn == "r"):
+			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
+
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -788,8 +803,8 @@ def stop_by_leftLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.003
-		time.sleep(.02)
+		t+=.0001
+		# time.sleep(.02)
 
 
 def stop_by_rightLeg():
@@ -807,8 +822,8 @@ def stop_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.003
-		time.sleep(.02)
+		t+=.0001
+		# time.sleep(.02)
 
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
@@ -824,29 +839,73 @@ sit_at_height()
 time.sleep(1.5)
 
 
-# starting by left leg
-#start_by_leftLeg()
+# forward motion
+x0 = 0.2
+# going stright
+start_by_leftLeg()
 
-#for _ in range(2):
-	#walk_by_rightLeg(turn = "S")
-	#walk_by_leftLeg(turn = "S")
+for _ in range(2):
+	walk_by_rightLeg(turn = "s")
+	walk_by_leftLeg(turn = "s")
 
-#stop_by_rightLeg()
+stop_by_rightLeg()
 
 
-# starting by right leg
+# turning right
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "r")
+	walk_by_leftLeg(turn = "r")
+
+stop_by_rightLeg()
+
+
+# turning left
 start_by_rightLeg()
 
 for _ in range(2):
 
-	walk_by_leftLeg(turn = "L")  # "L" --> left, "R" --> rigth, "S" --> stright
-	walk_by_rightLeg(turn = "L")
+	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+stop_by_leftLeg()
+
+
+# backward motion
+x0 = -0.2
+# going stright
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "s")
+	walk_by_leftLeg(turn = "s")
+
+stop_by_rightLeg()
+
+
+# turning right
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "r")
+	walk_by_leftLeg(turn = "r")
+
+stop_by_rightLeg()
+
+
+# turning left
+start_by_rightLeg()
+
+for _ in range(2):
+
+	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 stop_by_leftLeg()
 
 
 stand_upright()
-
 
 time.sleep(10)
 p.disconnect()

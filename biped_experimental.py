@@ -24,7 +24,13 @@ l0 = 0.0705
 
 t0 = 1.0
 z0 = 0.2   # sitting position height
-x0 = 0.2   # distance coverd in one step of walking
+
+# distance coverd in one step of walking.
+# x0 = (0, 0.2] for forward 
+# x0 = (0, -0.2] for backward
+# x0 = 0.0000001 for no walklength (just to turn left-right on its origial postion) 
+x0 = 0.2   
+
 motor_force = 2   # maximum torque by motors
 
 # # motor setting
@@ -746,8 +752,8 @@ def walk_by_leftLeg(turn):
 			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
 			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -757,7 +763,7 @@ def walk_by_leftLeg(turn):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.00005
+		t+=.0001
 		# time.sleep(.0001)
 
 
@@ -772,8 +778,8 @@ def walk_by_rightLeg(turn):
 			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
 			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*np.pi/16
-			rightLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*np.pi/16
+			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*np.pi/16
+			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*np.pi/16
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -783,7 +789,7 @@ def walk_by_rightLeg(turn):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.00005
+		t+=.0001
 		# time.sleep(.0001)
 
 
@@ -821,7 +827,7 @@ def stop_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0003
+		t+=.0001
 		# time.sleep(.02)
 
 
@@ -839,13 +845,13 @@ time.sleep(1.5)
 
 
 # starting by left leg
-#start_by_leftLeg()
+start_by_leftLeg()
 
-#for _ in range(2):
-	#walk_by_rightLeg(turn = "S")
-	#walk_by_leftLeg(turn = "S")
+for _ in range(2):
+	walk_by_rightLeg(turn = "r")
+	walk_by_leftLeg(turn = "r")
 
-#stop_by_rightLeg()
+stop_by_rightLeg()
 
 
 # starting by right leg
@@ -853,8 +859,8 @@ start_by_rightLeg()
 
 for _ in range(2):
 
-	walk_by_leftLeg(turn = "r")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "r")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l")  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l")  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 stop_by_leftLeg()
 
