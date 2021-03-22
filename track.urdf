@@ -19,11 +19,11 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <geometry>
-      <!-- <mesh filename="meshes/base_link_track.stl" scale="0.001 0.001 0.001"/> -->
-      <box size="7.1 2.0 0.05"/>
+      <mesh filename="meshes/base_link_track.stl" scale="0.001 0.001 0.001"/>
+      <!-- <box size="7.1 2.0 0.05"/> -->
     </geometry>
   </collision>
 </link>
