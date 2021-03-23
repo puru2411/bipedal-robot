@@ -5,33 +5,35 @@ from mpl_toolkits.mplot3d import Axes3D
 import math
 
 """
-
 xi, yi -> center of mass of robot
 x1, y1 -> left foot
 x2, y2 -> left hip joint
 x3, y3 -> right hip joint
 x4, y4 -> right foot
-
 """
 
-class TrajectoryGenerator():
-        def _init_(self):
-                self._pelvic_interval = 0.0705    # distance between the two hip joints
-                self._legUp_length = 0.11         # hip joint to knee joint
-                self._legDown_length = 0.11      # knee joint to foot joint
-                self._footJoint_to_bottom = 0.031 # foot joint to bottom
+class TrajectoryGenerator:
+        def __init__(self,pelvic_interval, legUp_length, legDown_length, footJoint_to_bottom):
+                self._pelvic_interval = pelvic_interval   # distance between the two hip joints
+                self._legUp_length = legUp_length        # hip joint to knee joint
+                self._legDown_length = legDown_length     # knee joint to foot joint
+                self._footJoint_to_bottom = footJoint_to_bottom # foot joint to bottom
 
         def setTrajectoryParameters(self, liftHeight, sittingHeight, swayLength, stepTime):
-                self._liftHeight = liftHeight         # height of lift of a foot #temp in original
-                self._sittingHeight = sittingHeight   # sit height. increase this will make leg more fold. too high or too low makes an error   
-                self._swayLength = swayLength         # foot sway length, length by which feet move in one step
-                self._stepTime = stepTime             # time taken for one step
-
-        def getSittingTrajectory(self,t):       # t is a parametric constant (here ,time)
+                self._liftHeight = liftHeight         # height of lift of a foot #temp in original (temp)
+                self._sittingHeight = sittingHeight   # sit height. increase this will make leg more fold. too high or too low makes an error  (z0)
+                self._swayLength = swayLength         # foot sway length, length by which feet move in one step (x0)
+                self._stepTime = stepTime             # time taken for one step (t0)
+        
+        # t is a parametric constant (here ,time)
+        def getSittingTrajectory(self,t):        
                 l0 = self._pelvic_interval
                 l1 = self._legUp_length
                 l2 = self._legDown_length
                 l3 = self._footJoint_to_bottom
+                t0 = self._stepTime
+                z0 = self._sittingHeight
+                x0 = self._swayLength
 
                 xi, yi = 0, 0
                 #hip joints
@@ -55,6 +57,9 @@ class TrajectoryGenerator():
                 l1 = self._legUp_length
                 l2 = self._legDown_length
                 l3 = self._footJoint_to_bottom
+                t0 = self._stepTime
+                z0 = self._sittingHeight
+                x0 = self._swayLength
 
                 xi, yi = 0, 0
                 #hip joints
@@ -78,8 +83,13 @@ class TrajectoryGenerator():
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
+                t0 = self._stepTime
                 t1 = 4*t0/10
                 t2 = t0-t1
+
                 #hip
                 if(t < t1):
                         x2 = xi
@@ -114,6 +124,10 @@ class TrajectoryGenerator():
         def getRightLegStartingTrajectory(self,t,height):
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
+                t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
                 t0 = self._stepTime
                 t1 = 4*t0/10
                 t2 = t0-t1
@@ -152,6 +166,10 @@ class TrajectoryGenerator():
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
+                t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
                 #hip
@@ -189,6 +207,10 @@ class TrajectoryGenerator():
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
+                t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
                 #hip
@@ -225,6 +247,10 @@ class TrajectoryGenerator():
         def getRightLegWalkingTrajectory(self,turn,t,height):
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
+                t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
                 if(turn == "R"):
                         temp = height/2
                 t0 = self._stepTime
@@ -264,6 +290,10 @@ class TrajectoryGenerator():
         def getLeftLegWalkingTrajectory(self,turn,t,height):
                 temp = height # 0.6*l0
                 xi, yi = 0, 0
+                t0 = self._stepTime
+                l0 = self._pelvic_interval
+                z0 = self._sittingHeight
+                x0 = self._swayLength
                 if(turn == "L"):
                         temp = height/2
                 t0 = self._stepTime
@@ -300,11 +330,35 @@ class TrajectoryGenerator():
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def printTrajectories(self):
-                pass
-                
+        def __create_plot(self): 
+                fig = plt.figure()
+                ax = fig.add_subplot(111, projection='3d')
+                ax.set_xlabel('x axis')
+                ax.set_ylabel('y axis')
+                ax.set_zlabel('z axis')
+                ax.set_autoscale_on(False)
+                fig.canvas.draw()
+                plt.show()
+                return fig, ax
 
-        
+        def __update_plot(X11, Y11, Z11, X12, Y12, Z12, X13, Y13, Z13, X14, Y14, Z14, fig, ax):
+                ax.cla()  
+                ax.plot_wireframe(X11, Y11, Z11, color = 'b')
+                ax.plot_wireframe(X12, Y12, Z12, color = 'r')
+                ax.plot_wireframe(X13, Y13, Z13, color = 'r')
+                ax.plot_wireframe(X14, Y14, Z14, color = 'b')
+                plt.draw()
+                ax.set_xlabel('x axis')
+                ax.set_ylabel('y axis')
+                ax.set_zlabel('z axis')
+                ax.set_autoscale_on(False)
+                fig.canvas.draw()
+                fig.canvas.flush_events()
+                plt.pause(.00001)
+
+        def plotTrajectories(self):   #to plot all the trajectries defined for the robot 
+                pass
+       
 
 
 
