@@ -1,6 +1,7 @@
 # Code By:-
 # Purushotam Kumar Agrawal { Github ---> PURU2411 }
 # Vibhanshu Vaibhav { Github ---> VibhanshuV }
+# Project GitHub: ---> https://github.com/puru2411/bipedal-robot.git
 
 import pybullet as p
 import time
@@ -11,7 +12,10 @@ import math
 import os
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+
+import motorController
 import trajectoryGenerator
+
 
 # Robot Body Parameters 
 l1 = 0.11		# Hip to Knee Length
@@ -33,40 +37,27 @@ motor_force = 2   # maximum torque by motors
 
 #initialiing the environment
 physicsClient = p.connect(p.GUI) #connecting to the physics simulation
-p.setGravity(0, 0, -9.8) #setting up gravity
-fixedTimeStep = 1.0/800.0 #Timestep 800Hz 
+p.setGravity(0, 0, -9.8)         #setting up gravity
+fixedTimeStep = 1.0/800.0        #Timestep 800Hz 
 p.setTimeStep(timeStep=fixedTimeStep, physicsClientId=physicsClient)
 useRealTimeSimulation = 1
 p.setRealTimeSimulation(useRealTimeSimulation)
 # p.resetDebugVisualizerCamera(cameraDistance=1, cameraYaw=10, cameraPitch=-5, cameraTargetPosition=[0, 0, 0.1], physicsClientId=physicsClient)
 
-#loading the groung
+# loading the groung
 p.setAdditionalSearchPath(pybullet_data.getDataPath())  
 planeId = p.loadURDF('plane.urdf') 
 
-#spawning the track
+# spawning the track
 trackStartPos = [0, 0, 0.06]
 trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
 trackId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
-#spawing the biped
+# spawing the biped
 robotStartPos = [0, 0, 0.36]
 robotStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
 robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', robotStartPos,
                    robotStartOrientation, useFixedBase=0, globalScaling= 1 )
-
-#joint indices for each leg
-rightLegMotor = [1, 2, 3, 4, 5, 6]
-leftLegMotor = [17, 18, 19, 20 ,21, 22]
-
-#positon of the joint motors
-rightLegMotorPosition = [0, 0, 0, 0, 0, 0]
-leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
-
-#setting all motor positions to 0
-for i in range(len(rightLegMotor)):
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
 
 """
 #To get info of the robot
@@ -79,8 +70,10 @@ for i in range(p.getNumJoints(robot)+1):
            print(p.getLinkStates(robot, [i]))
 """           
 
-trajectory = trajectoryGenerator.TrajectoryGenerator(l0,l1,l2,l3) # initializing trajectory generator
-trajectory.setTrajectoryParameters(temp,z0,x0,t0)  # setting up walk/trajectory parameters
+trajectory = trajectoryGenerator.TrajectoryGenerator(l0,l1,l2,l3)  # initializing trajectory generator
+trajectory.setTrajectoryParameters(temp,z0,x0,t0)                  # setting up walk/trajectory parameters
+
+controller = motorController.MotorController(robot, physicsClient,motor_force)  # setting up motor controller to control motor positions
 
 # Inverse Kinematics (to be updated...)
 def getInverseKinematics(Phip, Pfoot):
@@ -105,124 +98,99 @@ def getInverseKinematics(Phip, Pfoot):
 	q5 = -(q4+q3)
 	return [q1, q2, -q3, -q4, -q5, q6]
 
+def walk(d):
+	t = 0
+	while t<=t0:
+		if d == 'sit':
+			p1 , p2, p3, p4 = trajectory.getSittingTrajectory(t)
+		elif d == 'sta':
+			p1 , p2, p3, p4 = trajectory.getStandingTrajectory(t)
+		elif d == 'lst':
+			p1 , p2, p3, p4 = trajectory.getLeftLegStartingTrajectory(t,temp)
+		elif d == 'rst':
+			p1 , p2, p3, p4 = trajectory.getRightLegStartingTrajectory(t,temp)
+		elif d == 'l':
+			turn = 's'
+			p1 , p2, p3, p4 = trajectory.getLeftLegWalkingTrajectory(turn,t,temp)
+		elif d == 'r':
+			turn = 's'
+			p1 , p2, p3, p4 = trajectory.getRightLegWalkingTrajectory(turn,t,temp)
+		elif d == 'ls':
+			p1 , p2, p3, p4 = trajectory.getLeftLegStoppingTrajectory(t,temp)
+		elif d == 'rs':
+			p1 , p2, p3, p4 = trajectory.getRightLegStoppingTrajectory(t,temp)
+
+		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+		controller.setMotorPositions(targetMotorPositons)
+		t+=.00015
+		time.sleep(.0001)
+
+
+# def turn(d ,turn ,angle):
+# 	t = 0
+# 	while t<=t0:
+# 	  	if d == 'r' :
+# 	  		p1 , p2, p3, p4 = trajectory.getRightLegWalkingTrajectory(turn,t,temp)
+# 	  		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+# 	  		if(turn == "l"):
+# 	  			targetMotorPositons[6] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+# 	  			targetMotorPositons[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+# 	  		elif(turn == "r"):
+# 	  			targetMotorPositons[6] = ((t-2*t0/10)/(6*t0/10))*angle/2
+# 	  			targetMotorPositons[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+# 	  		controller.setMotorPositions(targetMotorPositons)
+
+# 	  	elif turn == 'l':
+# 	  		p1 , p2, p3, p4 = trajectory.getLeftLegWalkingTrajectory(turn,t,temp)
+# 	  		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+# 	  		if(turn == "l"):
+# 	  			targetMotorPositons[6] = ((t-2*t0/10)/(6*t0/10))*angle/2
+# 	  			targetMotorPositons[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+# 	  		elif(turn == "r"):
+# 	  			targetMotorPositons[6] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+# 	  			targetMotorPositons[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+# 	  		controller.setMotorPositions(targetMotorPositons)
+
+# 	  	t+=.00015
+# 	  	time.sleep(.0001)
+
+
+
 # Setting Up Motors
 def sit_at_height():
 	t =0
 	while t<=t0/4:
 		p1 , p2, p3, p4 = trajectory.getSittingTrajectory(t)
 
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
+		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+		controller.setMotorPositions(targetMotorPositons)
 		t+=.00015
 		time.sleep(.0001)
-
-
-def stand_at_height(h):
-	t =0
-	while t<=t0/4:
-		p1 , p2, p3, p4 = standing(t,h)
-
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
-		t+=.00015
-		time.sleep(.0001)
-
 
 def stand_upright():
 	t =0
 	while t<=t0/4:
 		p1 , p2, p3, p4 = trajectory.getStandingTrajectory(t)
 
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
+		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+		controller.setMotorPositions(targetMotorPositons)
 		t+=.00015
 		time.sleep(.0001)
-
-
-def start_by_leftLeg():
-	t =0
-	while t<=t0:
-		p1 , p2, p3, p4 = trajectory.getLeftLegStartingTrajectory(t,temp)
-
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
-		t+=.00015
-		time.sleep(.0001)
-
-
-def start_by_rightLeg():
-	t =0
-	while t<=t0:
-		p1 , p2, p3, p4 = trajectory.getRightLegStartingTrajectory(t,temp)
-
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
-		t+=.00015
-		time.sleep(.0001)
-
 
 def walk_by_leftLeg(turn, angle):
 	t =0
 	while t<=t0:
 		p1 , p2, p3, p4 = trajectory.getLeftLegWalkingTrajectory(turn,t,temp)
 
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
+		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
 		if(turn == "l"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[6] = ((t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[6] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
 
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
+		controller.setMotorPositions(targetMotorPositons)
 		t+=.00015
 		time.sleep(.0001)
 
@@ -232,63 +200,19 @@ def walk_by_rightLeg(turn, angle):
 	while t<=t0:
 		p1 , p2, p3, p4 = trajectory.getRightLegWalkingTrajectory(turn,t,temp)
 
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
+		targetMotorPositons = getInverseKinematics(p2, p1) + getInverseKinematics(p3, p4)
+
 		if(turn == "l"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[6] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[6] = ((t-2*t0/10)/(6*t0/10))*angle/2
+			targetMotorPositons[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
 
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
+		controller.setMotorPositions(targetMotorPositons)
 		t+=.00015
 		time.sleep(.0001)
 
-
-def stop_by_leftLeg():
-	t =0
-	while t<=t0:
-		p1 , p2, p3, p4 = trajectory.getLeftLegStoppingTrajectory(t,temp)
-
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
-		t+=.00015
-		time.sleep(.0001)
-
-
-def stop_by_rightLeg():
-	t =0
-	while t<=t0:
-		p1 , p2, p3, p4 = trajectory.getRightLegStoppingTrajectory(t,temp)
-
-		rightLegMotorPosition = getInverseKinematics(p2, p1)
-		leftLegMotorPosition = getInverseKinematics(p3, p4)
-		# print("p2, p1 : ", p2, p1)
-		# print("rightLegMotorPosition : ", rightLegMotorPosition)
-		# print("p3, p4 : ", p3, p4)
-		# print("leftLegMotorPosition : ", leftLegMotorPosition)
-		for i in range(len(rightLegMotor)):
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
-			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
-
-		t+=.00015
-		time.sleep(.0001)
 
 #################################################################################################################################################################
 ################################################### What your Robot should do for you, write below! #############################################################
@@ -302,74 +226,74 @@ time.sleep(1.5)
 # forward motion
 x0 = 0.2
 # going stright
-start_by_leftLeg()
+walk('lst')
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "s", angle = 0)
-	walk_by_leftLeg(turn = "s", angle = 0)
+	walk('r')
+	walk('l')
 
-stop_by_rightLeg()
+walk('rs')
 
 
 # turning right
-start_by_leftLeg()
+walk('lst')
 
 for _ in range(2):
 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-stop_by_rightLeg()
+walk('rs')
 
 
 # turning left
-start_by_rightLeg()
+walk('rst')
 
 for _ in range(2):
 
 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-stop_by_leftLeg()
+walk('ls')
 
 
 # going stright
-start_by_leftLeg()
+walk('lst')
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "s", angle = 0)
-	walk_by_leftLeg(turn = "s", angle = 0)
+	walk('r')
+	walk('l')
 
-stop_by_rightLeg()
+walk('rs')
 
 
 # turning left
-start_by_rightLeg()
+walk('rst')
 
 for _ in range(2):
 
 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-stop_by_leftLeg()
+walk('ls')
 
 # turning right
-start_by_leftLeg()
+walk('lst')
 
 for _ in range(2):
 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-stop_by_rightLeg()
+walk('rs')
 
 
 # going stright
-start_by_leftLeg()
+walk('lst')
 
 for _ in range(2):
 	walk_by_rightLeg(turn = "s", angle = 0)
 	walk_by_leftLeg(turn = "s", angle = 0)
 
-stop_by_rightLeg()
+walk('rs')
 
 
 # # backward motion
