@@ -76,8 +76,8 @@ robotId = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation,
 rightLegJoints = [1,4,7,10,13,16]  #from top to bottom
 leftLegJoints = [19,22,25,28,31,34] # from top to bottom
 for i in range(len(rightLegJoints)):
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition=[0,0,0,0,0,0])
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition=[0,0,0,0,0,0])
+	p.setJointMotorControl2( bodyIndex=robotId, jointIndex=rightLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
+	p.setJointMotorControl2( bodyIndex=robotId, jointIndex=leftLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
 """
 ##########################################################
 
