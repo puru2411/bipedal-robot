@@ -64,7 +64,23 @@ planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURD
 
 trackStartPos = [0,0,0.06]
 trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
-robotId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
+trackId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
+
+##################### NEW MODEL ##########################
+"""
+cubeStartPos = [0,1,0.6]
+cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
+robotId = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, 
+                   # useMaximalCoordinates=1, ## New feature in Pybullet
+                   flags=p.URDF_USE_INERTIA_FROM_FILE)
+rightLegJoints = [1,4,7,10,13,16]  #from top to bottom
+leftLegJoints = [19,22,25,28,31,34] # from top to bottom
+for i in range(len(rightLegJoints)):
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition=[0,0,0,0,0,0])
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition=[0,0,0,0,0,0])
+"""
+##########################################################
+
 
 # cubeStartPos1 = [0.5,0,1]
 
