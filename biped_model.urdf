@@ -1,12 +1,16 @@
 <?xml version="1.0" ?>
 <robot name="biped_model">
 
-<material name="yellow">
-  <color rgba="1.000 1.000 0.000 1.000"/>
+<material name="white">
+  <color rgba="1.000 1.000 1.000 1.000"/>
 </material>
 
 <material name="black">
   <color rgba="0.000 0.000 0.000 1.000"/>
+</material>
+
+<material name="silver">
+  <color rgba="0.800 0.800 0.800 1.000"/>
 </material>
 
 <link name="base_link">
@@ -20,7 +24,7 @@
     <geometry>
       <mesh filename="meshes1/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -42,7 +46,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="silver"/>
     <material/>
   </visual>
   <collision>
@@ -64,7 +68,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="silver"/>
     <material/>
   </visual>
   <collision>
@@ -86,7 +90,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -108,7 +112,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -130,7 +134,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="silver"/>
     <material/>
   </visual>
   <collision>
@@ -174,7 +178,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="silver"/>
     <material/>
   </visual>
   <collision>
@@ -196,7 +200,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -262,7 +266,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -306,7 +310,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -394,7 +398,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -438,7 +442,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>
@@ -504,7 +508,7 @@
     <geometry>
       <mesh filename="meshes1/ComponentL61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="yellow"/>
+    <material name="white"/>
     <material/>
   </visual>
   <collision>

@@ -981,8 +981,8 @@ time.sleep(10)
 # stand_upright()
 
 
-rightLegMotorPosition = [np.pi/8, 0, 0, np.pi/6, 0, 0]
-leftLegMotorPosition = [np.pi/8, 0, 0, np.pi/6, 0, 0]
+rightLegMotorPosition = [np.pi/8, 0, 0, np.pi/6, 0, np.pi/8]
+leftLegMotorPosition = [np.pi/8, 0, 0, -np.pi/6, 0, np.pi/8]
 
 # stting the motor to zero positon initially
 for i in range(len(rightLegMotor)):
