@@ -67,18 +67,22 @@ trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
 trackId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
 ##################### NEW MODEL ##########################
-'''
-cubeStartPos = [0,1,0.6]
+
+cubeStartPos = [0,0,0.6]
 cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
-robotId = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, 
-                   # useMaximalCoordinates=1, ## New feature in Pybullet
-                   flags=p.URDF_USE_INERTIA_FROM_FILE)
+robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 1)
+
+print("the joint info of robot : ")
+for i in range(p.getNumJoints(robot)):
+        if(p.getJointInfo(robot, i)[2] == 0):
+                print(p.getJointInfo(robot, i))
+
 rightLegMotor = [1, 2, 5, 6, 8, 10]  #from top to bottom
 leftLegMotor = [13, 14, 17, 18, 20, 22]  # from top to bottom
-for i in range(len(rightLegJoints)):
-	p.setJointMotorControl2( bodyIndex=robotId, jointIndex=rightLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
-	p.setJointMotorControl2( bodyIndex=robotId, jointIndex=leftLegJoints[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
-'''
+for i in range(len(rightLegMotor)):
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition= 0)
+
 ##########################################################
 
 
@@ -86,8 +90,8 @@ for i in range(len(rightLegJoints)):
 
 # boxId1 = p.loadURDF("sphere2red.urdf",cubeStartPos1, globalScaling= 0.05)
 
-robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.360],
-                   p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
+# robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.360],
+#                    p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
 #stairs
 # stairsStartPos = [-2,-0.08,0]
 # stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
@@ -96,16 +100,16 @@ robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_1
 #                    flags=p.URDF_USE_INERTIA_FROM_FILE)
 
 
-rightLegMotor = [1, 2, 3, 4, 5, 6]
-leftLegMotor = [17, 18, 19, 20 ,21, 22]
+# rightLegMotor = [1, 2, 3, 4, 5, 6]
+# leftLegMotor = [17, 18, 19, 20 ,21, 22]
 
-rightLegMotorPosition = [0, 0, 0, 0, 0, 0]
-leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
+#rightLegMotorPosition = [0, 0, 0, 0, 0, 0]
+#leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
 
 # stting the motor to zero positon initially
-for i in range(len(rightLegMotor)):
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+#for i in range(len(rightLegMotor)):
+	#p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
+	#p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
 
 # print("the joint info of robot : ")
 # for i in range(p.getNumJoints(robot)):
@@ -863,82 +867,82 @@ def stop_by_rightLeg():
 # what your robot should do for you. write bellow
 
 
-time.sleep(1.5)
-sit_at_height()
-time.sleep(1.5)
+time.sleep(10)
+# sit_at_height()
+# time.sleep(1.5)
 
 
-# forward motion
-x0 = 0.2
-# going stright
-start_by_leftLeg()
+# # forward motion
+# x0 = 0.2
+# # going stright
+# start_by_leftLeg()
 
-for _ in range(2):
-	walk_by_rightLeg(turn = "s", angle = 0)
-	walk_by_leftLeg(turn = "s", angle = 0)
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "s", angle = 0)
+# 	walk_by_leftLeg(turn = "s", angle = 0)
 
-stop_by_rightLeg()
-
-
-# turning right
-start_by_leftLeg()
-
-for _ in range(2):
-	walk_by_rightLeg(turn = "r", angle = np.pi/8)
-	walk_by_leftLeg(turn = "r", angle = np.pi/8)
-
-stop_by_rightLeg()
+# stop_by_rightLeg()
 
 
-# turning left
-start_by_rightLeg()
+# # turning right
+# start_by_leftLeg()
 
-for _ in range(2):
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+# 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+# stop_by_rightLeg()
+
+
+# # turning left
+# start_by_rightLeg()
+
+# for _ in range(2):
+
+# 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+# 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-stop_by_leftLeg()
+# stop_by_leftLeg()
 
 
-# going stright
-start_by_leftLeg()
+# # going stright
+# start_by_leftLeg()
 
-for _ in range(2):
-	walk_by_rightLeg(turn = "s", angle = 0)
-	walk_by_leftLeg(turn = "s", angle = 0)
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "s", angle = 0)
+# 	walk_by_leftLeg(turn = "s", angle = 0)
 
-stop_by_rightLeg()
+# stop_by_rightLeg()
 
 
-# turning left
-start_by_rightLeg()
+# # turning left
+# start_by_rightLeg()
 
-for _ in range(2):
+# for _ in range(2):
 
-	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+# 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+# 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-stop_by_leftLeg()
+# stop_by_leftLeg()
 
-# turning right
-start_by_leftLeg()
+# # turning right
+# start_by_leftLeg()
 
-for _ in range(2):
-	walk_by_rightLeg(turn = "r", angle = np.pi/8)
-	walk_by_leftLeg(turn = "r", angle = np.pi/8)
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+# 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-stop_by_rightLeg()
+# stop_by_rightLeg()
 
 
-# going stright
-start_by_leftLeg()
+# # going stright
+# start_by_leftLeg()
 
-for _ in range(2):
-	walk_by_rightLeg(turn = "s", angle = 0)
-	walk_by_leftLeg(turn = "s", angle = 0)
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "s", angle = 0)
+# 	walk_by_leftLeg(turn = "s", angle = 0)
 
-stop_by_rightLeg()
+# stop_by_rightLeg()
 
 
 # # backward motion
@@ -974,12 +978,31 @@ stop_by_rightLeg()
 # stop_by_leftLeg()
 
 
-stand_upright()
+# stand_upright()
 
-time.sleep(10)
+
+rightLegMotorPosition = [np.pi/8, 0, 0, np.pi/6, 0, 0]
+leftLegMotorPosition = [np.pi/8, 0, 0, np.pi/6, 0, 0]
+
+# stting the motor to zero positon initially
+for i in range(len(rightLegMotor)):
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+
+
+time.sleep(5)
+
+rightLegMotorPosition = [0, 0, 0, 0, 0, 0]
+leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
+# stting the motor to zero positon initially
+for i in range(len(rightLegMotor)):
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+
+
+time.sleep(50)
+
 p.disconnect()
-
-
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
 ################################################^^^^^^^^^^^^^^^^^^^################################################
