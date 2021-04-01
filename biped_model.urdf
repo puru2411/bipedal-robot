@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" ?>
 <robot name="COM">
 
@@ -1192,3 +1193,847 @@
 </joint>
 
 </robot>
+=======
+<?xml version="1.0" ?>
+<robot name="biped_model">
+
+<material name="white">
+  <color rgba="1.000 1.000 1.000 1.000"/>
+</material>
+
+<material name="black">
+  <color rgba="0.000 0.000 0.000 1.000"/>
+</material>
+
+<material name="silver">
+  <color rgba="0.800 0.800 0.800 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.04642687299329392 -0.05856788394564934 0.02946997760393358"/>
+    <mass value="6.087495213581755"/>
+    <inertia ixx="0.014785902842651074" ixy="-0.00011943604355989929" ixz="4.052811859958476e-05" iyy="0.02782618168633354" iyz="0.0006996436301212536" izz="0.03368371018690615"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes1/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes1/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR21">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.02692518754045367 -0.007402928621384919 0.025010666231418274"/>
+    <mass value="0.09185709979828287"/>
+    <inertia ixx="5.0163687785179274e-05" ixy="1.3410220184456058e-06" ixz="-5.125224563347975e-06" iyy="5.688785614683301e-05" iyz="1.0336820935100393e-05" izz="4.5383145683622686e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.038532 0.18373 0.003589"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.038532 0.18373 0.003589"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR41">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.01123475022306054 -0.05805215731289548 -0.004671568209334877"/>
+    <mass value="0.18510629044043106"/>
+    <inertia ixx="0.00012398617807459628" ixy="-1.4689737333858054e-05" ixz="-8.60209473107346e-07" iyy="5.902327368141689e-05" iyz="-7.755929246309589e-06" izz="0.00016677256339657845"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.020839 0.285188 -0.041415"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.020839 0.285188 -0.041415"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.01984811766804703 -0.42710390310712754 0.010531213295834627"/>
+    <mass value="0.3521119210080813"/>
+    <inertia ixx="0.0004893447900749526" ixy="-9.162992041313956e-06" ixz="3.260397026410494e-05" iyy="0.0006151042459896063" iyz="4.178285998847949e-05" izz="0.0001665638562537014"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR51Component241">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.01160646711124103 -0.021211426059390026 -0.023255550187149476"/>
+    <mass value="0.08459587295154185"/>
+    <inertia ixx="7.338981053278161e-05" ixy="1.750398005899358e-06" ixz="-1.5942234821624603e-06" iyy="4.716794606117431e-05" iyz="6.933879975922516e-06" izz="3.606465845162714e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.020385 0.374833 -0.04142"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.020385 0.374833 -0.04142"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL21">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.02712736304273003 -0.0073955105843481195 0.025150828643778045"/>
+    <mass value="0.09272661140293512"/>
+    <inertia ixx="5.041279014411301e-05" ixy="-1.3253400060312965e-06" ixz="5.403142625534988e-06" iyy="5.7509785676182826e-05" iyz="1.0330125334118102e-05" izz="4.5813057631725364e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.130623 0.183725 0.003589"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.130623 0.183725 0.003589"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoL31">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.007633210777994212 0.2131548716541745 -0.12320427778354145"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.409634688478173e-05" ixy="-5.060799491826348e-07" ixz="3.288592298868534e-10" iyy="4.062829114229996e-05" iyz="8.62251338037967e-11" izz="6.818318895881678e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.096001 0.412728 -0.158786"/>
+    <geometry>
+      <mesh filename="meshes1/servoL31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.096001 0.412728 -0.158786"/>
+    <geometry>
+      <mesh filename="meshes1/servoL31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL41">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.011235510456626768 -0.058051648119028576 0.007072431790664944"/>
+    <mass value="0.1851062904404302"/>
+    <inertia ixx="0.00012398617807458934" ixy="1.4689737333853717e-05" ixz="8.602094731069258e-07" iyy="5.9023273681476415e-05" iyz="-7.755929246310456e-06" izz="0.00016677256339662702"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.112551 0.285184 -0.029671"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.112551 0.285184 -0.029671"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL51">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.011606227199134178 -0.021211640035305346 -0.02325551891523385"/>
+    <mass value="0.08459586965507518"/>
+    <inertia ixx="7.33898094806458e-05" ixy="-1.7503980014686032e-06" ixz="1.5942234281330085e-06" iyy="4.716794569812309e-05" iyz="6.93387997056981e-06" izz="3.6064657152940285e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.112096 0.373113 -0.042627"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.112096 0.373113 -0.042627"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoR1v11">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.005874649977470161 0.008916156759986443 0.024601987955764678"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="6.818318895882025e-05" ixy="3.2885922975132813e-10" ixz="-8.622513409856417e-11" iyy="4.4096346884784656e-05" iyz="5.060799491813338e-07" izz="4.062829114230039e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.009829 0.137658 -0.001597"/>
+    <geometry>
+      <mesh filename="meshes1/servoR1v11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.009829 0.137658 -0.001597"/>
+    <geometry>
+      <mesh filename="meshes1/servoR1v11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoL11">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.005870408176834194 0.008916411148642278 0.024601889094953016"/>
+    <mass value="0.25257832542625036"/>
+    <inertia ixx="6.81815359492681e-05" ixy="-2.763378935399796e-12" ixz="4.393122291727197e-11" iyy="4.409603015031495e-05" iyz="5.055183367476922e-07" izz="4.062675597017902e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.101916 0.137658 -0.001597"/>
+    <geometry>
+      <mesh filename="meshes1/servoL11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.101916 0.137658 -0.001597"/>
+    <geometry>
+      <mesh filename="meshes1/servoL11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR11">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-3.801168099032415e-07 -0.012098257415274927 -0.017301724327885976"/>
+    <mass value="0.04762273835521005"/>
+    <inertia ixx="5.2562167390388364e-05" ixy="-1.9136168344369153e-17" ixz="1.071327271687239e-17" iyy="4.589315817775307e-05" iyz="1.9702199372918588e-06" izz="9.602970441978127e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.003954 0.153968 -0.036175"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.003954 0.153968 -0.036175"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoR21">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.00997632202701889 2.638877573124532e-07 0.025226528593510208"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.062829114230039e-05" ixy="-8.622513412905736e-11" ixz="5.060799491813575e-07" iyy="6.81831889588188e-05" iyz="3.2885922956159275e-10" izz="4.409634688478346e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.003954 0.1896 0.019899"/>
+    <geometry>
+      <mesh filename="meshes1/servoR21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.003954 0.1896 0.019899"/>
+    <geometry>
+      <mesh filename="meshes1/servoR21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentR31Component171">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.023451652719489686 -0.05219501264001758 -1.638063568835252e-05"/>
+    <mass value="0.12406261058924599"/>
+    <inertia ixx="9.076587837976262e-05" ixy="-3.8746643767008544e-07" ixz="-1.844914354296736e-09" iyy="6.0529451125097676e-05" iyz="-1.2232910998879673e-07" izz="0.00014187327441814775"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.037149 0.189602 -0.035586"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.037149 0.189602 -0.035586"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoR41">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.02522602898844287 -0.009976226296333879 1.0910479131265305e-07"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.409634688478173e-05" ixy="5.060799491811169e-07" ixz="3.28859229697118e-10" iyy="4.062829114230023e-05" iyz="-8.622513423747757e-11" izz="6.818318895882025e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.037149 0.29941 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoR41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.037149 0.29941 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoR41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoR61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.009975818717814612 3.092831113438166e-08 -0.02522634475823555"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.062829114229172e-05" ixy="8.622513454240944e-11" ixz="5.060799491814534e-07" iyy="6.818318895881906e-05" iyz="-3.288592293447523e-10" izz="4.40963468847852e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.010385 0.409221 -0.022545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.010385 0.409221 -0.022545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoR51">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.025226300576351317 0.009975657524142145 4.8916288977740585e-08"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.40963468847852e-05" ixy="-5.060799491813338e-07" ixz="-3.2885922976488065e-10" iyy="4.062829114230023e-05" iyz="-8.622513467115844e-11" izz="6.818318895882719e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.036695 0.40941 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/servoR51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.036695 0.40941 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/servoR51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL11">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-3.801168108191755e-07 -0.012239050578871258 -0.01840693141890681"/>
+    <mass value="0.04702613835521159"/>
+    <inertia ixx="4.973112309180098e-05" ixy="-1.919037845299343e-17" ixz="1.0936889414947526e-17" iyy="4.3118777716014394e-05" iyz="1.9201203024806054e-06" izz="9.510411171792478e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.096046 0.153968 -0.036175"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.096046 0.153968 -0.036175"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoL21">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.009975561793457835 2.0587433985364e-07 0.025226528593510426"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.062829114230039e-05" ixy="-8.622513467115844e-11" ixz="-5.060799491813609e-07" iyy="6.818318895881938e-05" iyz="-3.288592298868534e-10" izz="4.409634688478346e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.096046 0.1896 0.019899"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.096046 0.1896 0.019899"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL31Component311">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.024753191095203936 -0.05225014959591809 -1.864407038530691e-05"/>
+    <mass value="0.12057690606604259"/>
+    <inertia ixx="9.059967566987705e-05" ixy="-3.3675587649516225e-07" ixz="5.06059383308978e-11" iyy="5.5083470425859767e-05" iyz="-1.2191716247753753e-07" izz="0.0001364974799907357"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128861 0.189597 -0.035582"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128861 0.189597 -0.035582"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoL41">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.025226789222007676 -0.009975717102468085 -4.581024899003028e-07"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.409634688478173e-05" ixy="-5.060799491817675e-07" ixz="3.288592297784332e-10" iyy="4.0628291142300824e-05" iyz="8.62251338037967e-11" izz="6.818318895881331e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128861 0.299406 -0.035541"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128861 0.299406 -0.035541"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoL61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.00997557895138386 -2.4325011777071026e-07 -0.025226313315476895"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.0628291142298656e-05" ixy="8.622513293643497e-11" ixz="-5.060799491813541e-07" iyy="6.818318895881982e-05" iyz="3.2885923010369383e-10" izz="4.409634688477826e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.102096 0.407501 -0.023752"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.102096 0.407501 -0.023752"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ComponentL61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.029159122098383464 -0.02962261007827377 0.006176244738593046"/>
+    <mass value="0.3521119210080811"/>
+    <inertia ixx="0.0004893447900749803" ixy="9.162992041318943e-06" ixz="-3.2603970264115227e-05" iyy="0.0006151042459896497" iyz="4.178285998847906e-05" izz="0.0001665638562537014"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
+    <geometry>
+      <mesh filename="meshes1/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ServoL51">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.025226060809919057 0.009976166718009216 1.0910478986242422e-07"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.409634688479214e-05" ixy="5.060799491835022e-07" ixz="-3.288592297784332e-10" iyy="4.062829114230039e-05" iyz="8.62251338037967e-11" izz="6.818318895882719e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128406 0.409406 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128406 0.409406 -0.035545"/>
+    <geometry>
+      <mesh filename="meshes1/ServoL51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servoR31">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.00891602898844458 -0.024198637539690593 -0.005869710576260158"/>
+    <mass value="0.2525811539773393"/>
+    <inertia ixx="4.40963468847852e-05" ixy="5.060799491812254e-07" ixz="3.288592296835655e-10" iyy="4.062829114230028e-05" iyz="-8.622513467115844e-11" izz="6.818318895882025e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.020839 0.175379 -0.041456"/>
+    <geometry>
+      <mesh filename="meshes1/servoR31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.020839 0.175379 -0.041456"/>
+    <geometry>
+      <mesh filename="meshes1/servoR31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid16" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.034578 0.00587 0.01631"/>
+  <parent link="servoR21"/>
+  <child link="ComponentR21"/>
+</joint>
+
+<joint name="Rigid22" type="fixed">
+  <origin rpy="0 0 0" xyz="0.01631 0.014222 0.00587"/>
+  <parent link="ServoR41"/>
+  <child link="ComponentR41"/>
+</joint>
+
+<joint name="Rigid28" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.01443 0.403351 -0.020165"/>
+  <parent link="ServoR61"/>
+  <child link="ComponentR61"/>
+</joint>
+
+<joint name="Rigid29" type="fixed">
+  <origin rpy="0 0 0" xyz="0.01631 0.034577 0.005875"/>
+  <parent link="servoR51"/>
+  <child link="ComponentR51Component241"/>
+</joint>
+
+<joint name="Rigid35" type="fixed">
+  <origin rpy="0 0 0" xyz="0.034577 0.005875 0.01631"/>
+  <parent link="ServoL21"/>
+  <child link="ComponentL21"/>
+</joint>
+
+<joint name="Rigid36" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.034622 -0.229003 0.162375"/>
+  <parent link="ComponentL21"/>
+  <child link="servoL31"/>
+</joint>
+
+<joint name="Rigid40" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.01631 0.014222 -0.00587"/>
+  <parent link="ServoL41"/>
+  <child link="ComponentL41"/>
+</joint>
+
+<joint name="Rigid43" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.01631 0.036293 0.007082"/>
+  <parent link="ServoL51"/>
+  <child link="ComponentL51"/>
+</joint>
+
+<joint name="Rigid56" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.009829 -0.137658 0.001597"/>
+  <parent link="base_link"/>
+  <child link="servoR1v11"/>
+</joint>
+
+<joint name="Rigid57" type="fixed">
+  <origin rpy="0 0 0" xyz="0.101916 -0.137658 0.001597"/>
+  <parent link="base_link"/>
+  <child link="servoL11"/>
+</joint>
+
+<joint name="Rev68" type="continuous">
+  <origin rpy="0 0 0" xyz="0.005875 -0.01631 0.034578"/>
+  <parent link="servoR1v11"/>
+  <child link="ComponentR11"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+</joint>
+<transmission name="Rev68_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev68">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev68_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev69" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.035632 -0.056074"/>
+  <parent link="ComponentR11"/>
+  <child link="servoR21"/>
+  <axis xyz="-0.0 0.0 1.0"/>
+</joint>
+<transmission name="Rev69_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev69">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev69_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev70" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.01631 -0.014223 -0.00587"/>
+  <parent link="servoR31"/>
+  <child link="ComponentR31Component171"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+<transmission name="Rev70_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev70">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev70_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev71" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.109808 -4.1e-05"/>
+  <parent link="ComponentR31Component171"/>
+  <child link="ServoR41"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+<transmission name="Rev71_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev71">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev71_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev72" type="continuous">
+  <origin rpy="0 0 0" xyz="0.01 -0.034388 -0.018875"/>
+  <parent link="ComponentR51Component241"/>
+  <child link="ServoR61"/>
+  <axis xyz="-0.0 0.0 -1.0"/>
+</joint>
+<transmission name="Rev72_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev72">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev72_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev73" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.015856 -0.124222 -0.00587"/>
+  <parent link="ComponentR41"/>
+  <child link="servoR51"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+<transmission name="Rev73_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev73">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev73_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev74" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.00587 -0.01631 0.034578"/>
+  <parent link="servoL11"/>
+  <child link="ComponentL11"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+</joint>
+<transmission name="Rev74_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev74">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev74_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev75" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.035632 -0.056074"/>
+  <parent link="ComponentL11"/>
+  <child link="ServoL21"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+<transmission name="Rev75_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev75">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev75_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev76" type="continuous">
+  <origin rpy="0 0 0" xyz="0.03286 0.223131 -0.123204"/>
+  <parent link="servoL31"/>
+  <child link="ComponentL31Component311"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+<transmission name="Rev76_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev76">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev76_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev77" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.109809 -4.1e-05"/>
+  <parent link="ComponentL31Component311"/>
+  <child link="ServoL41"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+<transmission name="Rev77_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev77">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev77_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rev79" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.01 -0.034388 -0.018875"/>
+  <parent link="ComponentL51"/>
+  <child link="ServoL61"/>
+  <axis xyz="0.0 -0.0 1.0"/>
+</joint>
+<transmission name="Rev79_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev79">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev79_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid80" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.034577 0.005874 -0.01631"/>
+  <parent link="ServoL61"/>
+  <child link="ComponentL61"/>
+</joint>
+
+<joint name="Rev81" type="continuous">
+  <origin rpy="0 0 0" xyz="0.015855 -0.124222 0.005874"/>
+  <parent link="ComponentL41"/>
+  <child link="ServoL51"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+<transmission name="Rev81_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Rev81">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev81_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid82" type="fixed">
+  <origin rpy="0 0 0" xyz="0.017693 0.008351 0.045045"/>
+  <parent link="ComponentR21"/>
+  <child link="servoR31"/>
+</joint>
+
+</robot>
+>>>>>>> 68ad66386a2bc306295c2a6e89a5198a89bd3424
