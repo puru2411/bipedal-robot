@@ -19,7 +19,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <geometry>
       <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
@@ -41,7 +41,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.099046 0.153968 -0.021175"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_11.stl" scale="0.001 0.001 0.001"/>
@@ -63,7 +63,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.000954 0.153968 -0.021175"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v11.stl" scale="0.001 0.001 0.001"/>
@@ -85,7 +85,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.005046 0.1896 0.034899"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_21.stl" scale="0.001 0.001 0.001"/>
@@ -107,7 +107,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.001909 0.157701 0.222999"/>
     <geometry>
       <mesh filename="meshes/servo_v1_21.stl" scale="0.001 0.001 0.001"/>
@@ -129,7 +129,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.105046 0.1896 0.034899"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_31.stl" scale="0.001 0.001 0.001"/>
@@ -151,7 +151,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.198091 0.157701 0.222999"/>
     <geometry>
       <mesh filename="meshes/servo_v1_31.stl" scale="0.001 0.001 0.001"/>
@@ -173,7 +173,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.035532 0.18373 0.016839"/>
     <geometry>
       <mesh filename="meshes/New_comp_v31.stl" scale="0.001 0.001 0.001"/>
@@ -195,7 +195,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.017839 0.175379 -0.028206"/>
     <geometry>
       <mesh filename="meshes/servo_v1_41.stl" scale="0.001 0.001 0.001"/>
@@ -217,7 +217,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.002117 0.16563 -0.211938"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_41.stl" scale="0.001 0.001 0.001"/>
@@ -239,7 +239,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.033149 0.189602 -0.016336"/>
     <geometry>
       <mesh filename="meshes/New_Component_v21Component171.stl" scale="0.001 0.001 0.001"/>
@@ -261,7 +261,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.332486 0.302115 -0.055444"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_51.stl" scale="0.001 0.001 0.001"/>
@@ -283,7 +283,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.267761 0.321705 0.007854"/>
     <geometry>
       <mesh filename="meshes/servo_v1_51.stl" scale="0.001 0.001 0.001"/>
@@ -305,7 +305,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.016839 0.285188 -0.028165"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component3_Copy_v11.stl" scale="0.001 0.001 0.001"/>
@@ -327,7 +327,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.032695 0.40341 -0.022295"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_61.stl" scale="0.001 0.001 0.001"/>
@@ -349,7 +349,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.378215 0.439105 -0.04459"/>
     <geometry>
       <mesh filename="meshes/servo_v1_61.stl" scale="0.001 0.001 0.001"/>
@@ -371,7 +371,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.00677 0.430926 -0.435759"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_71.stl" scale="0.001 0.001 0.001"/>
@@ -393,7 +393,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.01277 0.402926 -0.417016"/>
     <geometry>
       <mesh filename="meshes/servo_v1_71.stl" scale="0.001 0.001 0.001"/>
@@ -415,7 +415,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.020607 0.403351 0.007015"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component1_v21.stl" scale="0.001 0.001 0.001"/>
@@ -437,7 +437,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.016385 0.374833 -0.02817"/>
     <geometry>
       <mesh filename="meshes/testing_Component2_Copy_v11Component241.stl" scale="0.001 0.001 0.001"/>
@@ -459,7 +459,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.129861 0.189597 -0.020582"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_81.stl" scale="0.001 0.001 0.001"/>
@@ -481,7 +481,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.133623 0.183725 0.018589"/>
     <geometry>
       <mesh filename="meshes/New_comp_mirror_v11.stl" scale="0.001 0.001 0.001"/>
@@ -503,7 +503,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.115931 0.175375 -0.014712"/>
     <geometry>
       <mesh filename="meshes/servo_v1_81.stl" scale="0.001 0.001 0.001"/>
@@ -525,7 +525,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.455877 -0.028569 0.2228"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_91.stl" scale="0.001 0.001 0.001"/>
@@ -547,7 +547,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.427766 0.319946 -0.147401"/>
     <geometry>
       <mesh filename="meshes/servo_v1_91.stl" scale="0.001 0.001 0.001"/>
@@ -569,7 +569,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.113551 0.285184 -0.014671"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component3_Copy_mirror_v11.stl" scale="0.001 0.001 0.001"/>
@@ -591,7 +591,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.646266 0.419861 -0.149951"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_111.stl" scale="0.001 0.001 0.001"/>
@@ -613,7 +613,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.126406 0.409406 -0.020545"/>
     <geometry>
       <mesh filename="meshes/servo_v1_101.stl" scale="0.001 0.001 0.001"/>
@@ -635,7 +635,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.110096 0.373113 -0.027627"/>
     <geometry>
       <mesh filename="meshes/testing_Component2__mirror_v11.stl" scale="0.001 0.001 0.001"/>
@@ -657,7 +657,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.052813 0.429749 -0.433497"/>
     <geometry>
       <mesh filename="meshes/darwin_SP0-5_Dfaut_v1_121.stl" scale="0.001 0.001 0.001"/>
@@ -679,7 +679,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.129861 0.183597 -0.020582"/>
     <geometry>
       <mesh filename="meshes/New_Component_v2_11Component311.stl" scale="0.001 0.001 0.001"/>
@@ -701,7 +701,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.105848 0.507598 -0.414753"/>
     <geometry>
       <mesh filename="meshes/servo_v1_111.stl" scale="0.001 0.001 0.001"/>
@@ -723,7 +723,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.134674 0.401631 0.008558"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component1_mirror_v11.stl" scale="0.001 0.001 0.001"/>
@@ -745,7 +745,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.000954 0.153968 -0.027175"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component6_v31.stl" scale="0.001 0.001 0.001"/>
@@ -767,7 +767,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.099046 0.153968 -0.027175"/>
     <geometry>
       <mesh filename="meshes/puru_returns_Component6_v3_11.stl" scale="0.001 0.001 0.001"/>
@@ -789,7 +789,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="0.006829 0.137658 0.013403"/>
     <geometry>
       <mesh filename="meshes/servo_v11.stl" scale="0.001 0.001 0.001"/>
@@ -811,7 +811,7 @@
     <material name="silver"/>
     <material/>
   </visual>
-  <collision>
+  <collision concave="yes">
     <origin rpy="0 0 0" xyz="-0.104916 0.137658 0.013403"/>
     <geometry>
       <mesh filename="meshes/servo_v1_11.stl" scale="0.001 0.001 0.001"/>
@@ -819,13 +819,15 @@
   </collision>
 </link>
 
-<joint name="Rev7" type="continuous">
+<joint name="Rev7" type="revolute">
   <origin rpy="0 0 0" xyz="-0.00587 -0.01631 0.034578"/>
   <parent link="servo_v1_11"/>
   <child link="darwin_SP0-5_Dfaut_v1_11"/>
   <axis xyz="-0.0 -1.0 0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev7_tran">
+<!-- <transmission name="Rev7_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev7">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -834,15 +836,17 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
-<joint name="Rev8" type="continuous">
+<joint name="Rev8" type="revolute">
   <origin rpy="0 0 0" xyz="0.005875 -0.01631 0.034578"/>
   <parent link="servo_v11"/>
   <child link="darwin_SP0-5_Dfaut_v11"/>
   <axis xyz="-0.0 -1.0 0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev8_tran">
+<!-- <transmission name="Rev8_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev8">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -851,7 +855,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid11" type="fixed">
   <origin rpy="0 0 0" xyz="0.006 -0.035632 -0.062074"/>
@@ -859,13 +863,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_21"/>
 </joint>
 
-<joint name="Rev12" type="continuous">
+<joint name="Rev12" type="revolute">
   <origin rpy="0 0 0" xyz="-0.006955 0.031899 -0.1881"/>
   <parent link="darwin_SP0-5_Dfaut_v1_21"/>
   <child link="servo_v1_21"/>
   <axis xyz="-0.0 0.0 1.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev12_tran">
+<!-- <transmission name="Rev12_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev12">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -874,7 +880,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid13" type="fixed">
   <origin rpy="0 0 0" xyz="0.006 -0.035632 -0.062074"/>
@@ -882,13 +888,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_31"/>
 </joint>
 
-<joint name="Rev14" type="continuous">
+<joint name="Rev14" type="revolute">
   <origin rpy="0 0 0" xyz="0.093045 0.031899 -0.1881"/>
   <parent link="darwin_SP0-5_Dfaut_v1_31"/>
   <child link="servo_v1_31"/>
   <axis xyz="-0.0 0.0 1.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev14_tran">
+<!-- <transmission name="Rev14_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev14">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -897,7 +905,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid16" type="fixed">
   <origin rpy="0 0 0" xyz="-0.033623 -0.026029 0.20616"/>
@@ -911,13 +919,15 @@
   <child link="servo_v1_41"/>
 </joint>
 
-<joint name="Rev18" type="continuous">
+<joint name="Rev18" type="revolute">
   <origin rpy="0 0 0" xyz="0.019956 0.009749 0.183732"/>
   <parent link="servo_v1_41"/>
   <child link="darwin_SP0-5_Dfaut_v1_41"/>
   <axis xyz="-1.0 0.0 -0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev18_tran">
+<!-- <transmission name="Rev18_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev18">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -926,7 +936,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid19" type="fixed">
   <origin rpy="0 0 0" xyz="-0.035266 -0.023972 -0.195602"/>
@@ -940,13 +950,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_51"/>
 </joint>
 
-<joint name="Rev21" type="continuous">
+<joint name="Rev21" type="revolute">
   <origin rpy="0 0 0" xyz="-0.064725 -0.01959 -0.063298"/>
   <parent link="darwin_SP0-5_Dfaut_v1_51"/>
   <child link="servo_v1_51"/>
   <axis xyz="-1.0 0.0 -0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev21_tran">
+<!-- <transmission name="Rev21_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev21">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -955,7 +967,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid22" type="fixed">
   <origin rpy="0 0 0" xyz="-0.2846 0.036517 0.036019"/>
@@ -969,13 +981,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_61"/>
 </joint>
 
-<joint name="Rev24" type="continuous">
+<joint name="Rev24" type="revolute">
   <origin rpy="0 0 0" xyz="0.41091 -0.035695 0.022295"/>
   <parent link="darwin_SP0-5_Dfaut_v1_61"/>
   <child link="servo_v1_61"/>
   <axis xyz="-1.0 0.0 -0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev24_tran">
+<!-- <transmission name="Rev24_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev24">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -984,7 +998,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid26" type="fixed">
   <origin rpy="0 0 0" xyz="0.009615 -0.056093 0.407589"/>
@@ -992,13 +1006,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_71"/>
 </joint>
 
-<joint name="Rev27" type="continuous">
+<joint name="Rev27" type="revolute">
   <origin rpy="0 0 0" xyz="-0.006 0.028 -0.018743"/>
   <parent link="darwin_SP0-5_Dfaut_v1_71"/>
   <child link="servo_v1_71"/>
   <axis xyz="-0.0 0.0 -1.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev27_tran">
+<!-- <transmission name="Rev27_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev27">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -1007,7 +1023,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid28" type="fixed">
   <origin rpy="0 0 0" xyz="-0.007837 -0.000425 -0.424031"/>
@@ -1021,13 +1037,15 @@
   <child link="testing_Component2_Copy_v11Component241"/>
 </joint>
 
-<joint name="Rev33" type="continuous">
+<joint name="Rev33" type="revolute">
   <origin rpy="0 0 0" xyz="0.01393 -0.014222 0.00587"/>
   <parent link="servo_v1_81"/>
   <child link="darwin_SP0-5_Dfaut_v1_81"/>
   <axis xyz="1.0 -0.0 0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev33_tran">
+<!-- <transmission name="Rev33_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev33">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -1036,7 +1054,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid35" type="fixed">
   <origin rpy="0 0 0" xyz="-0.064468 -0.026024 0.20441"/>
@@ -1056,13 +1074,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_91"/>
 </joint>
 
-<joint name="Rev39" type="continuous">
+<joint name="Rev39" type="revolute">
   <origin rpy="0 0 0" xyz="-0.028111 -0.348515 0.370201"/>
   <parent link="darwin_SP0-5_Dfaut_v1_91"/>
   <child link="servo_v1_91"/>
   <axis xyz="-1.0 0.0 0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev39_tran">
+<!-- <transmission name="Rev39_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev39">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -1071,7 +1091,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid40" type="fixed">
   <origin rpy="0 0 0" xyz="-0.314215 0.034762 -0.13273"/>
@@ -1085,13 +1105,15 @@
   <child link="darwin_SP0-5_Dfaut_v1_111"/>
 </joint>
 
-<joint name="Rev42" type="continuous">
+<joint name="Rev42" type="revolute">
   <origin rpy="0 0 0" xyz="0.772672 0.010455 -0.129406"/>
   <parent link="darwin_SP0-5_Dfaut_v1_111"/>
   <child link="servo_v1_101"/>
   <axis xyz="-1.0 0.0 -0.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev42_tran">
+<!-- <transmission name="Rev42_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev42">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -1100,7 +1122,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid43" type="fixed">
   <origin rpy="0 0 0" xyz="-0.01631 0.036293 0.007082"/>
@@ -1120,13 +1142,15 @@
   <child link="New_Component_v2_11Component311"/>
 </joint>
 
-<joint name="Rev46" type="continuous">
+<joint name="Rev46" type="revolute">
   <origin rpy="0 0 0" xyz="0.053035 -0.077849 -0.018744"/>
   <parent link="darwin_SP0-5_Dfaut_v1_121"/>
   <child link="servo_v1_111"/>
   <axis xyz="-0.0 0.0 -1.0"/>
+  <limit effort="1000" lower="-3.141" upper="3.141" velocity="5"/>
+  <dynamics damping="0.7"/>
 </joint>
-<transmission name="Rev46_tran">
+<!-- <transmission name="Rev46_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Rev46">
     <hardwareInterface>PositionJointInterface</hardwareInterface>
@@ -1135,7 +1159,7 @@
     <hardwareInterface>PositionJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
-</transmission>
+</transmission> -->
 
 <joint name="Rigid47" type="fixed">
   <origin rpy="0 0 0" xyz="0.028826 0.105967 -0.423311"/>
