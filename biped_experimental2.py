@@ -68,7 +68,7 @@ trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
 robotId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
 
-cubeStartPos = [0,0,0.6]
+cubeStartPos = [0,-0.05,0.5]
 cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
 robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 0)
 
@@ -204,7 +204,7 @@ def leftLegStarting(t, xi, yi):
 	else:
 		x4 = xi + x0/2
 	y4 = yi+l0/2
-	z4 = (.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/4))**2))
+	z4 = (.03)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/4))**2))
 
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
@@ -245,7 +245,7 @@ def rightLegStarting(t, xi, yi):
 	else:
 		x1 = xi + x0/2
 	y1 = yi-l0/2 
-	z1 = (.015)*np.sqrt(abs(1-((x1-(xi + x0/4))/(x0/4))**2))
+	z1 = (.03)*np.sqrt(abs(1-((x1-(xi + x0/4))/(x0/4))**2))
 
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
@@ -286,7 +286,7 @@ def leftLegStopping(t, xi, yi):
 	else:
 		x4 = xi + x0/4
 	y4 = yi+l0/2
-	z4 = (0.015)*np.sqrt(abs(1-((x4-xi)/(x0/4))**2))
+	z4 = (0.03)*np.sqrt(abs(1-((x4-xi)/(x0/4))**2))
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -325,7 +325,7 @@ def rightLegStopping(t, xi, yi):
 	else:
 		x1 = xi + x0/4
 	y1 = yi - l0/2
-	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi))/(x0/4))**2))
+	z1 = (0.03)*np.sqrt(abs(1-((x1-(xi))/(x0/4))**2))
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -366,7 +366,7 @@ def rightLegWalking(turn, t, xi, yi):
 	else:
 		x1 = xi + 3*x0/4
 	y1 = yi - l0/2
-	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
+	z1 = (0.03)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
 	if(turn == "R"):
 		z1 = 0
 
@@ -410,7 +410,7 @@ def leftLegWalking(turn, t, xi, yi):
 	else:
 		x4 = xi + 3*x0/4
 	y4 = yi+l0/2
-	z4 = (0.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
+	z4 = (0.03)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
 	if(turn == "L"):
 		z4 = 0
 
@@ -761,11 +761,11 @@ def walk_by_leftLeg(turn, angle):
 		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
 		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		if(turn == "l"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -789,11 +789,11 @@ def walk_by_rightLeg(turn, angle):
 		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
 		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		if(turn == "l"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -903,65 +903,65 @@ for _ in range(2):
 stop_by_rightLeg()
 
 
-# # turning right
-# start_by_leftLeg()
+# turning right
+start_by_leftLeg()
 
-# for _ in range(2):
-# 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
-# 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
+for _ in range(2):
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-# stop_by_rightLeg()
+stop_by_rightLeg()
 
 
-# # turning left
-# start_by_rightLeg()
+# turning left
+start_by_rightLeg()
 
-# for _ in range(2):
+for _ in range(2):
 
-# 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-# 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-# stop_by_leftLeg()
+stop_by_leftLeg()
 
 
-# # going stright
-# start_by_leftLeg()
+# going stright
+start_by_leftLeg()
 
-# for _ in range(2):
-# 	walk_by_rightLeg(turn = "s", angle = 0)
-# 	walk_by_leftLeg(turn = "s", angle = 0)
+for _ in range(2):
+	walk_by_rightLeg(turn = "s", angle = 0)
+	walk_by_leftLeg(turn = "s", angle = 0)
 
-# stop_by_rightLeg()
+stop_by_rightLeg()
 
 
-# # turning left
-# start_by_rightLeg()
+# turning left
+start_by_rightLeg()
 
-# for _ in range(2):
+for _ in range(2):
 
-# 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-# 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
-# stop_by_leftLeg()
+stop_by_leftLeg()
 
-# # turning right
-# start_by_leftLeg()
+# turning right
+start_by_leftLeg()
 
-# for _ in range(2):
-# 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
-# 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
+for _ in range(2):
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
-# stop_by_rightLeg()
+stop_by_rightLeg()
 
 
-# # going stright
-# start_by_leftLeg()
+# going stright
+start_by_leftLeg()
 
-# for _ in range(2):
-# 	walk_by_rightLeg(turn = "s", angle = 0)
-# 	walk_by_leftLeg(turn = "s", angle = 0)
+for _ in range(2):
+	walk_by_rightLeg(turn = "s", angle = 0)
+	walk_by_leftLeg(turn = "s", angle = 0)
 
-# stop_by_rightLeg()
+stop_by_rightLeg()
 
 
 # # backward motion
