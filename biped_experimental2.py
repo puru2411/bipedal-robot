@@ -31,7 +31,7 @@ z0 = 0.2   # sitting position height
 ## x0 = 0.0000001 for no walklength (just to turn left-right on its origial postion) 
 x0 = 0.2   
 
-motor_force = 2   # maximum torque by motors
+motor_force = 5   # maximum torque by motors
 
 # # motor setting
 # motor_kp = 0.5
@@ -70,7 +70,7 @@ robotId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixed
 
 cubeStartPos = [0,0,0.6]
 cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
-robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 1)
+robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 0)
 
 rightLegMotor = [1, 2, 5, 6, 8, 10]  #from top to bottom
 leftLegMotor = [13, 14, 17, 18, 20, 22]  # from top to bottom
@@ -80,8 +80,8 @@ leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
 
 # stting the motor to zero positon initially
 for i in range(len(rightLegMotor)):
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
 # print("the joint info of robot : ")
 # for i in range(p.getNumJoints(robot)):
