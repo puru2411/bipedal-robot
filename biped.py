@@ -62,15 +62,23 @@ p.setGravity(0, 0, -9.8)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())  # to load ground
 planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURDF('plane.urdf')
 
-robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.300],
-                   p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
+trackStartPos = [0,0,0.06]
+trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
+robotId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
+# cubeStartPos1 = [0.5,0,1]
+
+# boxId1 = p.loadURDF("sphere2red.urdf",cubeStartPos1, globalScaling= 0.05)
+
+robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.360],
+                   p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
 #stairs
-stairsStartPos = [1,-0.08,0]
-stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
-robotId = p.loadURDF("stairs.urdf",stairsStartPos, stairsStartOrientation, useFixedBase = 1, 
-                   # useMaximalCoordinates=1, ## New feature in Pybullet
-                   flags=p.URDF_USE_INERTIA_FROM_FILE)
+# stairsStartPos = [-2,-0.08,0]
+# stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
+# robotId = p.loadURDF("stairs.urdf",stairsStartPos, stairsStartOrientation, useFixedBase = 1, 
+#                    # useMaximalCoordinates=1, ## New feature in Pybullet
+#                    flags=p.URDF_USE_INERTIA_FROM_FILE)
+
 
 rightLegMotor = [1, 2, 3, 4, 5, 6]
 leftLegMotor = [17, 18, 19, 20 ,21, 22]
@@ -877,24 +885,12 @@ for _ in range(2):
 stop_by_leftLeg()
 
 
-# backward motion
-x0 = -0.2
 # going stright
 start_by_leftLeg()
 
 for _ in range(2):
 	walk_by_rightLeg(turn = "s", angle = 0)
 	walk_by_leftLeg(turn = "s", angle = 0)
-
-stop_by_rightLeg()
-
-
-# turning right
-start_by_leftLeg()
-
-for _ in range(2):
-	walk_by_rightLeg(turn = "r", angle = np.pi/8)
-	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
 stop_by_rightLeg()
 
@@ -909,6 +905,58 @@ for _ in range(2):
 	
 stop_by_leftLeg()
 
+# turning right
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
+
+stop_by_rightLeg()
+
+
+# going stright
+start_by_leftLeg()
+
+for _ in range(2):
+	walk_by_rightLeg(turn = "s", angle = 0)
+	walk_by_leftLeg(turn = "s", angle = 0)
+
+stop_by_rightLeg()
+
+
+# # backward motion
+# x0 = -0.2
+# # going stright
+# start_by_leftLeg()
+
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "s", angle = 0)
+# 	walk_by_leftLeg(turn = "s", angle = 0)
+
+# stop_by_rightLeg()
+
+
+# # turning right
+# start_by_leftLeg()
+
+# for _ in range(2):
+# 	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+# 	walk_by_leftLeg(turn = "r", angle = np.pi/8)
+
+# stop_by_rightLeg()
+
+
+# # turning left
+# start_by_rightLeg()
+
+# for _ in range(2):
+
+# 	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+# 	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+# stop_by_leftLeg()
+
 
 stand_upright()
 
@@ -918,4 +966,4 @@ p.disconnect()
 
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
-################################################^^^^^^^^^^^^^^^^^^^################################################
+###############################################^^^^^^^^^^^^^^^^^^^################################################
