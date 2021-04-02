@@ -12,7 +12,7 @@ class MotorController:
     def __init__(self, robot, physicsClientId, motor_force):
         self._robot = robot
         self._physicsClientId = physicsClientId
-        self._joint_id_list = [1, 17, 2, 18, 3, 19, 4, 20, 5, 21, 6, 22]  # 1,2,3,4,5,6 -> right leg, 17,18,19,20,21,22 -> left leg
+        self._joint_id_list = [1, 13, 2, 14, 5, 17, 6, 18, 8, 20, 10, 22]  # 1,2,3,4,5,6 -> right leg, 17,18,19,20,21,22 -> left leg
         joint_pos_list = [] 
         for i in range(len(self._joint_id_list)):
             joint_pos_list.append(p.getJointState(self._robot, self._joint_id_list[i], physicsClientId=self._physicsClientId)[0])
@@ -34,6 +34,9 @@ class MotorController:
         #arranging motors positions in proper sequence (r,l,r,l,r,l...)
         rightLegMotorPosition = targetMotorPositions[:6]
         leftLegMotorPosition = targetMotorPositions[6:]
+        leftLegMotorPosition[2] = -leftLegMotorPosition[2] 
+        leftLegMotorPosition[5] = -leftLegMotorPosition[5]
+
         targetMotorPosition = []
         for i in range(len(rightLegMotorPosition)):
             targetMotorPosition.append(rightLegMotorPosition[i])

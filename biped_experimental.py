@@ -25,13 +25,13 @@ l0 = 0.0705
 t0 = 1.0
 z0 = 0.2   # sitting position height
 
-# distance coverd in one step of walking.
-# x0 = (0, 0.2] for forward 
-# x0 = (0, -0.2] for backward
-# x0 = 0.0000001 for no walklength (just to turn left-right on its origial postion) 
+## distance coverd in one step of walking.
+## x0 = (0, 0.2] for forward 
+## x0 = (0, -0.2] for backward
+## x0 = 0.0000001 for no walklength (just to turn left-right on its origial postion) 
 x0 = 0.2   
 
-motor_force = 2   # maximum torque by motors
+motor_force = 6   # maximum torque by motors
 
 # # motor setting
 # motor_kp = 0.5
@@ -62,34 +62,26 @@ p.setGravity(0, 0, -9.8)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())  # to load ground
 planeId = p.loadURDF('plane.urdf')  # or p.loadURDF('samurai.urdf')  # p.loadURDF('plane.urdf')
 
+
 trackStartPos = [0,0,0.06]
 trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
 robotId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
-# cubeStartPos1 = [0.5,0,1]
 
-# boxId1 = p.loadURDF("sphere2red.urdf",cubeStartPos1, globalScaling= 0.05)
+cubeStartPos = [0,-0.05,0.5]
+cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
+robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 0)
 
-robot = p.loadURDF(os.path.abspath(os.path.dirname(__file__)) + '/humanoid_leg_12dof.8.urdf', [0, 0, 0.360],
-                   p.getQuaternionFromEuler([0, 0, 0]), useFixedBase=0, globalScaling= 1 )
-#stairs
-# stairsStartPos = [-2,-0.08,0]
-# stairsStartOrientation = p.getQuaternionFromEuler([0,0,np.pi/2])
-# robotId = p.loadURDF("stairs.urdf",stairsStartPos, stairsStartOrientation, useFixedBase = 1, 
-#                    # useMaximalCoordinates=1, ## New feature in Pybullet
-#                    flags=p.URDF_USE_INERTIA_FROM_FILE)
-
-
-rightLegMotor = [1, 2, 3, 4, 5, 6]
-leftLegMotor = [17, 18, 19, 20 ,21, 22]
+rightLegMotor = [1, 2, 5, 6, 8, 10]  #from top to bottom
+leftLegMotor = [13, 14, 17, 18, 20, 22]  # from top to bottom
 
 rightLegMotorPosition = [0, 0, 0, 0, 0, 0]
 leftLegMotorPosition = [0, 0, 0, 0, 0, 0]
 
 # stting the motor to zero positon initially
 for i in range(len(rightLegMotor)):
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
-	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
+	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
 # print("the joint info of robot : ")
 # for i in range(p.getNumJoints(robot)):
@@ -212,7 +204,7 @@ def leftLegStarting(t, xi, yi):
 	else:
 		x4 = xi + x0/2
 	y4 = yi+l0/2
-	z4 = (.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/4))**2))
+	z4 = (.03)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/4))**2))
 
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
@@ -253,7 +245,7 @@ def rightLegStarting(t, xi, yi):
 	else:
 		x1 = xi + x0/2
 	y1 = yi-l0/2 
-	z1 = (.015)*np.sqrt(abs(1-((x1-(xi + x0/4))/(x0/4))**2))
+	z1 = (.03)*np.sqrt(abs(1-((x1-(xi + x0/4))/(x0/4))**2))
 
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
@@ -294,7 +286,7 @@ def leftLegStopping(t, xi, yi):
 	else:
 		x4 = xi + x0/4
 	y4 = yi+l0/2
-	z4 = (0.015)*np.sqrt(abs(1-((x4-xi)/(x0/4))**2))
+	z4 = (0.03)*np.sqrt(abs(1-((x4-xi)/(x0/4))**2))
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -333,7 +325,7 @@ def rightLegStopping(t, xi, yi):
 	else:
 		x1 = xi + x0/4
 	y1 = yi - l0/2
-	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi))/(x0/4))**2))
+	z1 = (0.03)*np.sqrt(abs(1-((x1-(xi))/(x0/4))**2))
 
 	return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
@@ -374,7 +366,7 @@ def rightLegWalking(turn, t, xi, yi):
 	else:
 		x1 = xi + 3*x0/4
 	y1 = yi - l0/2
-	z1 = (0.015)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
+	z1 = (0.03)*np.sqrt(abs(1-((x1-(xi+x0/4))/(x0/2))**2))
 	if(turn == "R"):
 		z1 = 0
 
@@ -418,7 +410,7 @@ def leftLegWalking(turn, t, xi, yi):
 	else:
 		x4 = xi + 3*x0/4
 	y4 = yi+l0/2
-	z4 = (0.015)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
+	z4 = (0.03)*np.sqrt(abs(1-((x4-(xi + x0/4))/(x0/2))**2))
 	if(turn == "L"):
 		z4 = 0
 
@@ -631,7 +623,7 @@ def get_inv_kin_angles(Phip, Pfoot):
 
 	q1 = 0
 	q2 = np.arctan(y/z)
-	q6 = -q2
+	q6 = q2
 
 	l11 = l1*np.cos(q2)
 	l21 = l2*np.cos(q2)
@@ -642,11 +634,11 @@ def get_inv_kin_angles(Phip, Pfoot):
 	q3 = phi1+phi2
 
 	phi3 = np.arccos((l11**2 + l21**2 - r**2)/(2*l11*l21))
-	q4 = phi3-np.pi
+	q4 = np.pi - phi3
 
-	q5 = -(q4+q3)
+	q5 = q4-q3
 
-	return [q1, q2, -q3, -q4, -q5, q6]
+	return [q1, q2, q3, q4, q5, q6]
 
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
@@ -659,8 +651,10 @@ def sit_at_height():
 	while t<=t0/4:
 		p1 , p2, p3, p4 = sitting(t)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -669,7 +663,7 @@ def sit_at_height():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -678,8 +672,10 @@ def stand_at_height(h):
 	while t<=t0/4:
 		p1 , p2, p3, p4 = standing(t,h)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -688,7 +684,7 @@ def stand_at_height(h):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -697,8 +693,10 @@ def stand_upright():
 	while t<=t0/4:
 		p1 , p2, p3, p4 = standing(t)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -707,7 +705,7 @@ def stand_upright():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -716,8 +714,10 @@ def start_by_leftLeg():
 	while t<=t0:
 		p1 , p2, p3, p4 = leftLegStarting(t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -726,7 +726,7 @@ def start_by_leftLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -735,8 +735,10 @@ def start_by_rightLeg():
 	while t<=t0:
 		p1 , p2, p3, p4 = rightLegStarting(t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -745,7 +747,7 @@ def start_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -754,14 +756,16 @@ def walk_by_leftLeg(turn, angle):
 	while t<=t0:
 		p1 , p2, p3, p4 = leftLegWalking(turn, t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		if(turn == "l"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -771,7 +775,7 @@ def walk_by_leftLeg(turn, angle):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -780,14 +784,16 @@ def walk_by_rightLeg(turn, angle):
 	while t<=t0:
 		p1 , p2, p3, p4 = rightLegWalking(turn, t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		if(turn == "l"):
-			leftLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -(1-(t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = (1-(t-2*t0/10)/(6*t0/10))*angle/2
 		elif(turn == "r"):
-			leftLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
-			rightLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			leftLegMotorPosition[0] = -((t-2*t0/10)/(6*t0/10))*angle/2
+			rightLegMotorPosition[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
 
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
@@ -797,7 +803,7 @@ def walk_by_rightLeg(turn, angle):
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -806,8 +812,10 @@ def stop_by_leftLeg():
 	while t<=t0:
 		p1 , p2, p3, p4 = leftLegStopping(t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -816,7 +824,7 @@ def stop_by_leftLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -825,8 +833,10 @@ def stop_by_rightLeg():
 	while t<=t0:
 		p1 , p2, p3, p4 = rightLegStopping(t, 0, 0)
 
-		rightLegMotorPosition = get_inv_kin_angles(p2, p1)
-		leftLegMotorPosition = get_inv_kin_angles(p3, p4)
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p2, p1)
+		rightLegMotorPosition = [q1, q2, q3, q4, q5, q6]
+		[q1, q2, q3, q4, q5, q6] = get_inv_kin_angles(p3, p4)
+		leftLegMotorPosition = [q1, q2, -q3, q4, q5, -q6]
 		# print("p2, p1 : ", p2, p1)
 		# print("rightLegMotorPosition : ", rightLegMotorPosition)
 		# print("p3, p4 : ", p3, p4)
@@ -835,7 +845,7 @@ def stop_by_rightLeg():
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i], force=motor_force)
 			p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i], force=motor_force)
 
-		t+=.0002
+		t+=.00015
 		time.sleep(.0001)
 
 
@@ -845,6 +855,35 @@ def stop_by_rightLeg():
 ###################################################################################################################
 ###################################################################################################################
 # what your robot should do for you. write bellow
+
+
+# time.sleep(1.5)
+
+# sit_at_height()
+
+# # rightLegMotorPosition = [-np.pi/4, 0, 0, 0, 0, 0]
+# # leftLegMotorPosition = [-np.pi/4, 0, 0, 0, 0, 0]
+
+# # # stting the motor to zero positon initially
+# # for i in range(len(rightLegMotor)):
+# # 	p.setJointMotorControl2( bodyIndex=robot, jointIndex=rightLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=rightLegMotorPosition[i])
+# # 	p.setJointMotorControl2( bodyIndex=robot, jointIndex=leftLegMotor[i], controlMode=p.POSITION_CONTROL, targetPosition=leftLegMotorPosition[i])
+
+
+
+# time.sleep(20)
+# p.disconnect()
+
+
+
+################################################^^^^^^^^^^^^^^^^^^^################################################
+###############################################^^^^^^^^^^^^^^^^^^^################################################
+
+
+###################################################################################################################
+###################################################################################################################
+# what your robot should do for you. write bellow
+
 
 
 time.sleep(1.5)
@@ -962,8 +1001,6 @@ stand_upright()
 
 time.sleep(10)
 p.disconnect()
-
-
 
 ################################################^^^^^^^^^^^^^^^^^^^################################################
 ###############################################^^^^^^^^^^^^^^^^^^^################################################

@@ -16,13 +16,13 @@
 <link name="base_link">
   <inertial>
     <origin rpy="0 0 0" xyz="0.04642687299329392 -0.05856788394564934 0.02946997760393358"/>
-    <mass value="1.087495213581755"/>
+    <mass value="1.487495213581755"/>
     <inertia ixx="0.014785902842651074" ixy="-0.00011943604355989929" ixz="4.052811859958476e-05" iyy="0.02782618168633354" iyz="0.0006996436301212536" izz="0.03368371018690615"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <geometry>
-      <mesh filename="meshes1/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -30,7 +30,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <geometry>
-      <mesh filename="meshes1/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -44,7 +44,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.038532 0.18373 0.003589"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
     <material/>
@@ -52,7 +52,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.038532 0.18373 0.003589"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -66,7 +66,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.020839 0.285188 -0.041415"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
     <material/>
@@ -74,7 +74,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.020839 0.285188 -0.041415"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -88,7 +88,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -96,8 +96,16 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.9</mu>
+            <mu2>0.9</mu2>
+          </ode>
+        </friction>
+      </surface>
   </collision>
 </link>
 
@@ -110,7 +118,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.020385 0.374833 -0.04142"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -118,7 +126,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.020385 0.374833 -0.04142"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR51Component241.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -132,7 +140,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.130623 0.183725 0.003589"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
     <material/>
@@ -140,7 +148,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.130623 0.183725 0.003589"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -154,7 +162,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.096001 0.412728 -0.158786"/>
     <geometry>
-      <mesh filename="meshes1/servoL31.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoL31.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -162,7 +170,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.096001 0.412728 -0.158786"/>
     <geometry>
-      <mesh filename="meshes1/servoL31.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoL31.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -176,7 +184,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.112551 0.285184 -0.029671"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
     <material/>
@@ -184,7 +192,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.112551 0.285184 -0.029671"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -198,7 +206,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.112096 0.373113 -0.042627"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -206,7 +214,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.112096 0.373113 -0.042627"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -220,7 +228,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.009829 0.137658 -0.001597"/>
     <geometry>
-      <mesh filename="meshes1/servoR1v11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR1v11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -228,7 +236,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.009829 0.137658 -0.001597"/>
     <geometry>
-      <mesh filename="meshes1/servoR1v11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR1v11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -242,7 +250,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.101916 0.137658 -0.001597"/>
     <geometry>
-      <mesh filename="meshes1/servoL11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoL11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -250,7 +258,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.101916 0.137658 -0.001597"/>
     <geometry>
-      <mesh filename="meshes1/servoL11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoL11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -264,7 +272,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.003954 0.153968 -0.036175"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -272,7 +280,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.003954 0.153968 -0.036175"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -286,7 +294,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.003954 0.1896 0.019899"/>
     <geometry>
-      <mesh filename="meshes1/servoR21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -294,7 +302,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.003954 0.1896 0.019899"/>
     <geometry>
-      <mesh filename="meshes1/servoR21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -308,7 +316,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.037149 0.189602 -0.035586"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -316,7 +324,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.037149 0.189602 -0.035586"/>
     <geometry>
-      <mesh filename="meshes1/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentR31Component171.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -330,7 +338,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.037149 0.29941 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/ServoR41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoR41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -338,7 +346,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.037149 0.29941 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/ServoR41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoR41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -352,7 +360,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.010385 0.409221 -0.022545"/>
     <geometry>
-      <mesh filename="meshes1/ServoR61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoR61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -360,7 +368,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.010385 0.409221 -0.022545"/>
     <geometry>
-      <mesh filename="meshes1/ServoR61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoR61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -374,7 +382,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.036695 0.40941 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/servoR51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -382,7 +390,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.036695 0.40941 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/servoR51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -396,7 +404,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.096046 0.153968 -0.036175"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -404,7 +412,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.096046 0.153968 -0.036175"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL11.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL11.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -418,7 +426,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.096046 0.1896 0.019899"/>
     <geometry>
-      <mesh filename="meshes1/ServoL21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -426,7 +434,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.096046 0.1896 0.019899"/>
     <geometry>
-      <mesh filename="meshes1/ServoL21.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL21.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -440,7 +448,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.128861 0.189597 -0.035582"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -448,7 +456,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.128861 0.189597 -0.035582"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL31Component311.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -462,7 +470,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.128861 0.299406 -0.035541"/>
     <geometry>
-      <mesh filename="meshes1/ServoL41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -470,7 +478,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.128861 0.299406 -0.035541"/>
     <geometry>
-      <mesh filename="meshes1/ServoL41.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL41.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -484,7 +492,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.102096 0.407501 -0.023752"/>
     <geometry>
-      <mesh filename="meshes1/ServoL61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -492,7 +500,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.102096 0.407501 -0.023752"/>
     <geometry>
-      <mesh filename="meshes1/ServoL61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -506,7 +514,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="white"/>
     <material/>
@@ -514,8 +522,16 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
     <geometry>
-      <mesh filename="meshes1/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
     </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.9</mu>
+            <mu2>0.9</mu2>
+          </ode>
+        </friction>
+      </surface>
   </collision>
 </link>
 
@@ -528,7 +544,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.128406 0.409406 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/ServoL51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -536,7 +552,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="-0.128406 0.409406 -0.035545"/>
     <geometry>
-      <mesh filename="meshes1/ServoL51.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/ServoL51.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -550,7 +566,7 @@
   <visual>
     <origin rpy="0 0 0" xyz="0.020839 0.175379 -0.041456"/>
     <geometry>
-      <mesh filename="meshes1/servoR31.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR31.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="black"/>
     <material/>
@@ -558,7 +574,7 @@
   <collision>
     <origin rpy="0 0 0" xyz="0.020839 0.175379 -0.041456"/>
     <geometry>
-      <mesh filename="meshes1/servoR31.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="meshes/servoR31.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
