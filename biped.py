@@ -238,8 +238,8 @@ walk('rs')
 walk('lst')
 
 for _ in range(2):
-	walk_by_rightLeg(turn = "r", angle = np.pi/8.9)
-	walk_by_leftLeg(turn = "r", angle = np.pi/8.9)
+	walk_by_rightLeg(turn = "r", angle = np.pi/8)
+	walk_by_leftLeg(turn = "r", angle = np.pi/8)
 
 walk('rs')
 
@@ -249,8 +249,8 @@ walk('rst')
 
 for _ in range(2):
 
-	walk_by_leftLeg(turn = "l", angle = np.pi/7.6)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
-	walk_by_rightLeg(turn = "l", angle = np.pi/7.6)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	walk_by_leftLeg(turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_by_rightLeg(turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 walk('ls')
 

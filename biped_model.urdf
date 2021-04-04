@@ -79,36 +79,6 @@
   </collision>
 </link>
 
-<link name="ComponentR61">
-  <inertial>
-    <origin rpy="0 0 0" xyz="0.01984811766804703 -0.42710390310712754 0.010531213295834627"/>
-    <mass value="0.3521119210080813"/>
-    <inertia ixx="0.0004893447900749526" ixy="-9.162992041313956e-06" ixz="3.260397026410494e-05" iyy="0.0006151042459896063" iyz="4.178285998847949e-05" izz="0.0001665638562537014"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
-    <geometry>
-      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="white"/>
-    <material/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="0.024815 0.00587 -0.00238"/>
-    <geometry>
-      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <surface>
-        <friction>
-          <ode>
-            <mu>0.9</mu>
-            <mu2>0.9</mu2>
-          </ode>
-        </friction>
-      </surface>
-  </collision>
-</link>
-
 <link name="ComponentR51Component241">
   <inertial>
     <origin rpy="0 0 0" xyz="0.01160646711124103 -0.021211426059390026 -0.023255550187149476"/>
@@ -505,36 +475,6 @@
   </collision>
 </link>
 
-<link name="ComponentL61">
-  <inertial>
-    <origin rpy="0 0 0" xyz="0.029159122098383464 -0.02962261007827377 0.006176244738593046"/>
-    <mass value="0.3521119210080811"/>
-    <inertia ixx="0.0004893447900749803" ixy="9.162992041318943e-06" ixz="-3.2603970264115227e-05" iyy="0.0006151042459896497" iyz="4.178285998847906e-05" izz="0.0001665638562537014"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
-    <geometry>
-      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="white"/>
-    <material/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="-0.067519 0.401627 -0.007442"/>
-    <geometry>
-      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <surface>
-        <friction>
-          <ode>
-            <mu>0.9</mu>
-            <mu2>0.9</mu2>
-          </ode>
-        </friction>
-      </surface>
-  </collision>
-</link>
-
 <link name="ServoL51">
   <inertial>
     <origin rpy="0 0 0" xyz="-0.025226060809919057 0.009976166718009216 1.0910478986242422e-07"/>
@@ -579,6 +519,66 @@
   </collision>
 </link>
 
+<link name="ComponentL61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.018965170421906957 -0.030423144505546396 0.012227230298932697"/>
+    <mass value="0.4041576625809834"/>
+    <inertia ixx="0.0006407968958574151" ixy="1.0641777175132011e-05" ixz="-4.39582757401747e-05" iyy="0.000799893854830331" iyz="5.5024729167680534e-05" izz="0.00020344272570760324"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.116319 0.401627 -0.007442"/>
+    <geometry>
+      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.116319 0.401627 -0.007442"/>
+    <geometry>
+      <mesh filename="meshes/ComponentL61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.9</mu>
+            <mu2>0.9</mu2>
+          </ode>
+        </friction>
+      </surface>
+  </collision>
+</link>
+
+<link name="ComponentR61">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.029859132720981438 -0.030420709332023843 0.012216946609251343"/>
+    <mass value="0.4039555240314861"/>
+    <inertia ixx="0.0006403933178822652" ixy="-1.069359487853314e-05" ixz="4.41619907761938e-05" iyy="0.0007991552917670542" iyz="5.500213224078057e-05" izz="0.00020309558420256169"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.024193 0.403351 -0.006235"/>
+    <geometry>
+      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="white"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.024193 0.403351 -0.006235"/>
+    <geometry>
+      <mesh filename="meshes/ComponentR61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.9</mu>
+            <mu2>0.9</mu2>
+          </ode>
+        </friction>
+      </surface>
+  </collision>
+</link>
+
 <joint name="Rigid16" type="fixed">
   <origin rpy="0 0 0" xyz="-0.034578 0.00587 0.01631"/>
   <parent link="servoR21"/>
@@ -589,12 +589,6 @@
   <origin rpy="0 0 0" xyz="0.01631 0.014222 0.00587"/>
   <parent link="ServoR41"/>
   <child link="ComponentR41"/>
-</joint>
-
-<joint name="Rigid28" type="fixed">
-  <origin rpy="0 0 0" xyz="-0.01443 0.403351 -0.020165"/>
-  <parent link="ServoR61"/>
-  <child link="ComponentR61"/>
 </joint>
 
 <joint name="Rigid29" type="fixed">
@@ -826,12 +820,6 @@
   </actuator>
 </transmission>
 
-<joint name="Rigid80" type="fixed">
-  <origin rpy="0 0 0" xyz="-0.034577 0.005874 -0.01631"/>
-  <parent link="ServoL61"/>
-  <child link="ComponentL61"/>
-</joint>
-
 <joint name="Rev81" type="continuous">
   <origin rpy="0 0 0" xyz="0.015855 -0.124222 0.005874"/>
   <parent link="ComponentL41"/>
@@ -853,6 +841,18 @@
   <origin rpy="0 0 0" xyz="0.017693 0.008351 0.045045"/>
   <parent link="ComponentR21"/>
   <child link="servoR31"/>
+</joint>
+
+<joint name="Rigid83" type="fixed">
+  <origin rpy="0 0 0" xyz="0.014223 0.005874 -0.01631"/>
+  <parent link="ServoL61"/>
+  <child link="ComponentL61"/>
+</joint>
+
+<joint name="Rigid84" type="fixed">
+  <origin rpy="0 0 0" xyz="0.034578 0.00587 -0.01631"/>
+  <parent link="ServoR61"/>
+  <child link="ComponentR61"/>
 </joint>
 
 </robot>
