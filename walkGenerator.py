@@ -58,7 +58,7 @@ class WalkGenerator():
 			
 			targetMotorPositons = self.getInverseKinematics(p2, p1) + self.getInverseKinematics(p3, p4)
 			self.controller.setMotorPositions(targetMotorPositons)
-			t+=.00015
+			t+=.0002
 			time.sleep(.0001)
 
 	def start_stop_motions(self, d, swayLength):
@@ -76,7 +76,7 @@ class WalkGenerator():
 
 			targetMotorPositons = self.getInverseKinematics(p2, p1) + self.getInverseKinematics(p3, p4)
 			self.controller.setMotorPositions(targetMotorPositons)
-			t+=.00015
+			t+=.0002
 			time.sleep(.0001)
 
 	def walk(self, d, swayLength, turn, angle):
@@ -107,5 +107,5 @@ class WalkGenerator():
 					targetMotorPositons[0] = ((t-2*t0/10)/(6*t0/10))*angle/2
 
 			self.controller.setMotorPositions(targetMotorPositons)
-			t+=.00015
+			t+=.0002
 			time.sleep(.0001)

@@ -53,7 +53,7 @@ trackStartOrientation = p.getQuaternionFromEuler([np.pi,0,0])
 trackId = p.loadURDF("track.urdf",trackStartPos, trackStartOrientation, useFixedBase = 1)
 
 # spawing the biped
-cubeStartPos = [0,-0.05,0.6]
+cubeStartPos = [0,-0.05,0.55]
 cubeStartOrientation = p.getQuaternionFromEuler([np.pi/2,0,np.pi/2])
 robot = p.loadURDF("biped_model.urdf",cubeStartPos, cubeStartOrientation, useFixedBase = 0)
 
@@ -76,6 +76,45 @@ walk_gen = walkGenerator.WalkGenerator(l0, l1, l2, l3, hip_shift, sittinghip_shi
 ################################################### What your Robot should do for you, write below! #############################################################
 #################################################################################################################################################################
 
+
+
+
+# time.sleep(1.5)
+# walk_gen.sit_stand_motion(d = "sit")
+# time.sleep(1.5)
+
+
+# # forward motion
+# swayLength = 0.2
+# print(p.getLinkStates(robot, [0])[0][0])
+# print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+
+# # going stright
+# walk_gen.start_stop_motions(d ='lst', swayLength = swayLength)
+# print(p.getLinkStates(robot, [0])[0][0])
+# print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+
+# for _ in range(2):
+# 	# walk_by_rightLeg(turn = "r", angle = np.pi/8)
+# 	walk_gen.walk(d = "r", swayLength = swayLength, turn = "r", angle = np.pi/4 *3/4)
+# 	# walk_by_leftLeg(turn = "r", angle = np.pi/8)
+# 	walk_gen.walk(d = "l", swayLength = swayLength, turn = "r", angle = np.pi/4 *3/4)
+# 	print(p.getLinkStates(robot, [0])[0][0])
+# 	print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+	
+
+
+# walk_gen.start_stop_motions(d='rs', swayLength = swayLength)
+# print(p.getLinkStates(robot, [0])[0][0])
+# print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+
+
+# time.sleep(10)
+# p.disconnect()
+
+
+
+
 time.sleep(1.5)
 walk_gen.sit_stand_motion(d = "sit")
 time.sleep(1.5)
@@ -88,9 +127,7 @@ swayLength = 0.2
 walk_gen.start_stop_motions(d ='lst', swayLength = swayLength)
 
 for _ in range(2):
-	# walk_by_rightLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
-	# walk_by_leftLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
 
 
@@ -101,9 +138,7 @@ walk_gen.start_stop_motions(d='rs', swayLength = swayLength)
 walk_gen.start_stop_motions(d='lst', swayLength = swayLength)
 
 for _ in range(2):
-	# walk_by_rightLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "r", swayLength = swayLength, turn = "r", angle = np.pi/8)
-	# walk_by_leftLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "l", swayLength = swayLength, turn = "r", angle = np.pi/8)
 
 walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
@@ -118,6 +153,151 @@ for _ in range(2):
 	walk_gen.walk(d = "r", swayLength = swayLength, turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
 	
 walk_gen.start_stop_motions(d = 'ls', swayLength = swayLength)
+
+ang = np.pi/2-p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2]
+# print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2], p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+if (ang > 0.01):
+	print("turingn left : ", ang)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+elif(ang < -0.01):
+	print("turingn right : ", ang)
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+
+
+# going stright
+walk_gen.start_stop_motions(d = 'lst', swayLength = swayLength)
+
+for _ in range(2):
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
+
+walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
+
+
+# turning left
+walk_gen.start_stop_motions(d = 'rst', swayLength = swayLength)
+
+for _ in range(2):
+
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+walk_gen.start_stop_motions(d = 'ls', swayLength = swayLength)
+
+# turning right
+walk_gen.start_stop_motions(d = 'lst', swayLength = swayLength)
+
+for _ in range(2):
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "r", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "r", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
+
+ang = np.pi/2-p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2]
+if (ang > 0.01):
+	print("turingn left : ", ang)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+elif(ang < -0.01):
+	print("turingn right : ", ang)
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+
+
+# going stright
+walk_gen.start_stop_motions(d = 'lst', swayLength = swayLength)
+
+for _ in range(2):
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
+
+walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
+
+
+
+
+for _ in (range(3)):
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = np.pi/6*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = np.pi/6*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+
+dis = 0.000 - p.getLinkStates(robot, [0])[0][0][1]
+# swayLength = (2.0/3.0)*dis
+if(abs(dis) >0.05 ):
+	swayLength = dis/1.50
+	print(swayLength)
+	# going stright
+	walk_gen.start_stop_motions(d ='lst', swayLength = swayLength)
+	for _ in range(1):
+		walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
+		walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
+	walk_gen.start_stop_motions(d='rs', swayLength = swayLength)
+
+for _ in (range(3)):
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = np.pi/6*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = np.pi/6*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+
+ang = -np.pi/2-p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2]
+print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2], p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+
+if (ang > 0.01):
+	print("turingn left : ", ang)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+elif(ang < -0.01):
+	print("turingn right : ", ang)
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+
+
+
+
+
+# forward motion
+swayLength = 0.2
+
+# going stright
+walk_gen.start_stop_motions(d ='lst', swayLength = swayLength)
+
+for _ in range(2):
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
+
+
+walk_gen.start_stop_motions(d='rs', swayLength = swayLength)
+
+
+# turning right
+walk_gen.start_stop_motions(d='lst', swayLength = swayLength)
+
+for _ in range(2):
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "r", angle = np.pi/8)
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "r", angle = np.pi/8)
+
+walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
+
+
+# turning left
+walk_gen.start_stop_motions(d = 'rst', swayLength = swayLength)
+
+for _ in range(2):
+
+	walk_gen.walk(d = "l", swayLength = swayLength, turn = "l", angle = np.pi/8)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = swayLength, turn = "l", angle = np.pi/8)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+	
+walk_gen.start_stop_motions(d = 'ls', swayLength = swayLength)
+
+ang = -np.pi/2-p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2]
+# print(p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2], p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1]))
+if (ang > 0.01):
+	print("turingn left : ", ang)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+elif(ang < -0.01):
+	print("turingn right : ", ang)
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
 
 
 # going stright
@@ -151,20 +331,29 @@ for _ in range(2):
 	
 walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
 
+ang = -np.pi/2-p.getEulerFromQuaternion(p.getLinkStates(robot, [0])[0][1])[2]
+if (ang > 0.01):
+	print("turingn left : ", ang)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("L" --> left, "R" --> rigth, "S" --> stright) --> when only 5 dof of leg is used
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "l", angle = abs(ang)*3/4)  # ("l" --> left, "r" --> rigth, "s" --> stright) --> when all 6 dof of leg is used
+elif(ang < -0.01):
+	print("turingn right : ", ang)
+	walk_gen.walk(d = "r", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+	walk_gen.walk(d = "l", swayLength = 0.000001, turn = "r", angle = abs(ang)*3/4)
+
 
 # going stright
 walk_gen.start_stop_motions(d = 'lst', swayLength = swayLength)
 
 for _ in range(2):
-	# walk_by_rightLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "r", swayLength = swayLength, turn = "s", angle = 0)
-	# walk_by_leftLeg(turn = "r", angle = np.pi/8)
 	walk_gen.walk(d = "l", swayLength = swayLength, turn = "s", angle = 0)
 
 walk_gen.start_stop_motions(d = 'rs', swayLength = swayLength)
 
-walk_gen.sit_stand_motion(d = "sta")
 
+
+walk_gen.sit_stand_motion(d = "sta")
 
 time.sleep(10)
 p.disconnect()
