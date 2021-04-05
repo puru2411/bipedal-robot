@@ -19,9 +19,9 @@ class TrajectoryGenerator:
                 self._legDown_length = legDown_length     # knee joint to foot joint
                 self._footJoint_to_bottom = footJoint_to_bottom # foot joint to bottom
 
-        def setTrajectoryParameters(self, liftHeight, sittingHeight, swayLength, stepTime):
-                self._liftHeight = liftHeight         # height of lift of a foot #temp in original (temp)
-                self._sittingHeight = sittingHeight   # sit height. increase this will make leg more fold. too high or too low makes an error  (z0)
+        def setTrajectoryParameters(self, hip_shift, sittinghip_shift, swayLength, stepTime):
+                self._hip_shift = hip_shift         # hip_shift of lift of a foot #temp in original (temp)
+                self._sittinghip_shift = sittinghip_shift   # sit hip_shift. increase this will make leg more fold. too high or too low makes an error  (z0)
                 self._swayLength = swayLength         # foot sway length, length by which feet move in one step (x0)
                 self._stepTime = stepTime             # time taken for one step (t0)
         
@@ -32,7 +32,7 @@ class TrajectoryGenerator:
                 l2 = self._legDown_length
                 l3 = self._footJoint_to_bottom
                 t0 = self._stepTime
-                z0 = self._sittingHeight
+                z0 = self._sittinghip_shift
                 x0 = self._swayLength
 
                 xi, yi = 0, 0
@@ -58,7 +58,7 @@ class TrajectoryGenerator:
                 l2 = self._legDown_length
                 l3 = self._footJoint_to_bottom
                 t0 = self._stepTime
-                z0 = self._sittingHeight
+                z0 = self._sittinghip_shift
                 x0 = self._swayLength
 
                 xi, yi = 0, 0
@@ -79,13 +79,13 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getLeftLegStartingTrajectory(self,t,height):
-                temp = height # 0.6*l0
+        def getLeftLegStartingTrajectory(self,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 t0 = self._stepTime
                 t1 = 4*t0/10
                 t2 = t0-t1
@@ -121,13 +121,13 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getRightLegStartingTrajectory(self,t,height):
-                temp = height # 0.6*l0
+        def getRightLegStartingTrajectory(self,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 t0 = self._stepTime
                 t1 = 4*t0/10
                 t2 = t0-t1
@@ -162,13 +162,13 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getLeftLegStoppingTrajectory(self,t,height):
-                temp = height # 0.6*l0
+        def getLeftLegStoppingTrajectory(self,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
@@ -203,13 +203,13 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getRightLegStoppingTrajectory(self,t,height):
-                temp = height # 0.6*l0
+        def getRightLegStoppingTrajectory(self,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
@@ -244,15 +244,15 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getRightLegWalkingTrajectory(self,turn,t,height):
-                temp = height # 0.6*l0
+        def getRightLegWalkingTrajectory(self,turn,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 if(turn == "R"):
-                        temp = height/2
+                        temp = self._hip_shift/2
                 t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
@@ -287,15 +287,15 @@ class TrajectoryGenerator:
 
                 return [x1, y1, z1],  [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]
 
-        def getLeftLegWalkingTrajectory(self,turn,t,height):
-                temp = height # 0.6*l0
+        def getLeftLegWalkingTrajectory(self,turn,t,swayLength):
+                temp = self._hip_shift # 0.6*l0
                 xi, yi = 0, 0
                 t0 = self._stepTime
                 l0 = self._pelvic_interval
-                z0 = self._sittingHeight
-                x0 = self._swayLength
+                z0 = self._sittinghip_shift
+                x0 = swayLength
                 if(turn == "L"):
-                        temp = height/2
+                        temp = self._hip_shift/2
                 t0 = self._stepTime
                 t1 = 5*t0/10
                 t2 = t0-t1
